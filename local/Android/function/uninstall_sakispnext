@@ -1,0 +1,79 @@
+uninstall_sakispnext() {
+    while true; do
+        whiptail --title "卸载确认" --yesno "你确定要卸载此脚本吗？" 10 60
+        if [ $? -eq 0 ]; then
+            clear
+            echo -e "\033[1;31m开始执行 SakiSP-NEXT 脚本卸载流程...\033[0m"
+            sleep 1
+            
+            cd ~ || {
+                echo -e "\033[1;31m错误：无法切换到主目录！\033[0m"
+                sleep 2
+                clear
+                return 1
+            }
+            echo -e "\033[1;34m已切换到主目录：$(pwd)\033[0m"
+            sleep 0.5
+            
+            local SYSTEM_PATH="${HOME}/.termux/共享文件夹"  
+            local USER_PATH="${HOME}/.termux/SakiSP-NEXT"  
+            local GIT_PATH="${HOME}/SakiSP-NEXT"  
+
+            if [ -f "$SYSTEM_PATH" ]; then
+                sudo rm -f "$SYSTEM_PATH"
+                echo -e "\033[1;32m→ 已删除路径文件：$SYSTEM_PATH\033[0m"
+            else
+                echo -e "\033[1;33m→ 路径文件 $SYSTEM_PATH 不存在，跳过删除\033[0m"
+            fi
+            
+            if [ -f "$USER_PATH" ]; then
+                sudo rm -f "$USER_PATH"
+                echo -e "\033[1;32m→ 已删除路径文件：$USER_PATH\033[0m"
+            else
+                echo -e "\033[1;33m→ 路径文件 $USER_PATH 不存在，跳过删除\033[0m"
+            fi
+            
+            if [ -f "$GIT_PATH" ]; then
+                sudo rm -f "$KALI_PATH"
+                echo -e "\033[1;32m→ 已删除路径文件：$KALI_PATH\033[0m"
+            else
+                echo -e "\033[1;33m→ 路径文件 $KALI_PATH 不存在，跳过删除\033[0m"
+            fi
+            sleep 0.5
+            
+            cd ~ || {
+                echo -e "\033[1;31m错误：再次切换到主目录失败！\033[0m"
+                return 1
+            }
+            
+            if [ -d "SakiSP-NEXT" ]; then
+                sudo rm -rf "SakiSP-NEXT"
+                echo -e "\033[1;32m→ 已删除 SakiSP-NEXT 文件夹\033[0m"
+            else
+                echo -e "\033[1;33m→ SakiSP-NEXT 文件夹不存在，跳过删除\033[0m"
+            fi
+            
+            if [ -d ".sakisp-repo" ]; then
+                sudo rm -rf ".sakisp-repo"
+                echo -e "\033[1;32m→ 已删除 .sakisp-repo 文件夹\033[0m"
+            else
+                echo -e "\033[1;33m→ 已完成所有项目！\033[0m"
+            fi
+            sleep 0.5
+            
+            echo -e "\n\033[1;35m=================================================\033[0m"
+            echo -e "\033[1;32m✅ SakiSP-NEXT 脚本已成功卸载完毕！（如在文件夹内,输入cd即可退出该文件夹，然后使用ls检查）\033[0m"
+            echo -e "\033[1;34m感谢您曾与 SakiSP-NEXT 相伴，期待未来再次相遇～\033[0m"
+            echo -e "\033[1;35m=================================================\033[0m"
+            echo -e "\n\033[1;33m按回车键退出...\033[0m"
+            read -r
+            clear
+            exit 1
+        else
+            echo -e "\033[1;33m已取消卸载操作\033[0m"
+            sleep 1
+            clear
+            break
+        fi
+    done
+}

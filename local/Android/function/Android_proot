@@ -216,7 +216,7 @@ install_proot() {
 	cp -r ${HOME}/SakiSP-NEXT/config ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
 	cp -r ${HOME}/SakiSP-NEXT/function ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
 	cp -r ${HOME}/SakiSP-NEXT/local ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
-	cp ${HOME}/SakiSP-NEXT/mikunext.sh ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
+	cp ${HOME}/SakiSP-NEXT/sakispnext.sh ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
 	cp ${HOME}/SakiSP-NEXT/git_push.sh ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
 	echo -e "${GREEN}复制优化脚本到容器${RES}"
 	cp ${HOME}/SakiSP-NEXT/function/proot_proc/.* ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/
