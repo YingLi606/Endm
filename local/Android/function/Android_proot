@@ -36,7 +36,6 @@ open_ubuntu_os_list() {
 			"1" "Jammy（22.04 LTS）" \
 			"2" "Noble（24.04 LTS）" \
 			"3" "Plucky（25.04 LTS）" \
-			"4" "问题（25.10）" \			
 			"0" "退出" 3>&1 1>&2 2>&3
 	)
 	case ${ubuntu_os_list} in
@@ -56,11 +55,6 @@ open_ubuntu_os_list() {
 		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/ubuntu/plucky/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
 		Download_proot_url=${Proot_os_download_source}/ubuntu/plucky/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
 		;;
-	4)
-		os_name=Questing_Ubuntu_25.10
-		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/ubuntu/questing/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
-		Download_proot_url=${Proot_os_download_source}/ubuntu/questing/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
-		;;		
 	*)
 		exit 1
 		;;
