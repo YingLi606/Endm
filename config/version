@@ -1,5 +1,5 @@
 {
-    "version": "8.0.5",
+    "version": "8.0.6",
     "git_clone": "YingLi606/SakiSP-NEXT",
     "description": "1.MikuOne-NEXT 正式更名为 SakiSP-NEXT 2.移除了Ubuntu Questing，由于暂未找到问题点"
 }
