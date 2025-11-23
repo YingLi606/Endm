@@ -4,9 +4,8 @@ open_debian_os_list() {
 	debian_os_list=$(
 		whiptail --title "选择功能" --menu "请选择你需要安装Debian系统" 15 60 6 \
 			"1" "Trixie（Debian 13 稳定版）" \
-			"2" "Forky（Debian 13 滚动更新版）" \			
-			"3" "Bookworm（Debian 12）" \
-			"4" "Bullseye（Debian 11）" \
+			"2" "Bookworm（Debian 12）" \
+			"3" "Bullseye（Debian 11）" \
 			"0" "退出" 3>&1 1>&2 2>&3
 	)
 	case ${debian_os_list} in
@@ -15,17 +14,12 @@ open_debian_os_list() {
 		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/debian/trixie/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
 		Download_proot_url=${Proot_os_download_source}/debian/trixie/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
 		;;
-    2)
-		os_name=Forky_Debian_13
-		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/debian/forky/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
-		Download_proot_url=${Proot_os_download_source}/debian/forky/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
-		;;		
-	3)
+	2)
 		os_name=Bookworm_Debian_12
 		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/debian/bookworm/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
 		Download_proot_url=${Proot_os_download_source}/debian/bookworm/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
 		;;
-	4)
+	3)
 		os_name=Bullseye_Debian_11
 		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/debian/bullseye/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
 		Download_proot_url=${Proot_os_download_source}/debian/bullseye/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
@@ -39,7 +33,7 @@ open_debian_os_list() {
 open_kalii_os_list() {
 	kali_os_list=$(
 		whiptail --title "选择功能" --menu "请选择你需要安装Kali系统" 15 60 6 \
-			"1" "Current" \
+			"1" "Kali" \
 			"0" "退出" 3>&1 1>&2 2>&3
 	)
 	case ${debian_os_list} in
@@ -118,18 +112,18 @@ open_rockylinux_os_list() {
 open_centos_os_list() {
 	centos_os_list=$(
 		whiptail --title "选择功能" --menu "请选择你要安装的CentOS系统" 15 60 6 \
-			"1" "CentOS_10-Stream" \
-			"2" "CentOS_9-Stream" \
+			"1" "centos_10-Stream" \
+			"2" "centos_9-Stream" \
 			"0" "退出" 3>&1 1>&2 2>&3
 	)
 	case ${centos_os_list} in
 	1)
-		os_name=CentOS_10-Stream
+		os_name=centos_10-Stream
 		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/centos/10-Stream/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
 		Download_proot_url=${Proot_os_download_source}/centos/10-Stream/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
 		;;
 	2)
-		os_name=CentOS_9-Stream
+		os_name=centos_9-Stream
 		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/centos/9-Stream/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
 		Download_proot_url=${Proot_os_download_source}/centos/9-Stream/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
 		;;

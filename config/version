@@ -1,5 +1,5 @@
 {
-    "version": "8.1.5",
+    "version": "8.1.5-f1",
     "git_clone": "YingLi606/SakiSP-NEXT",
-    "description": "1.新增Kali容器 2.新增Rockylinux 10 3.新增Debian Forky,CentOS_10-Stream"
+    "description": "1.新增Kali容器 2.新增Rockylinux 10 3.新增CentOS_10-Stream"
 }
