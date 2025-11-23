@@ -1,5 +1,5 @@
 {
-    "version": "8.1.4",
+    "version": "8.1.5",
     "git_clone": "YingLi606/SakiSP-NEXT",
-    "description": "1.MikuOne-NEXT 正式更名为 SakiSP-NEXT 2.移除了Ubuntu Questing，由于暂未找到问题点 3.新增 卸载脚本 功能"
+    "description": "1.新增Kali容器 2.新增Rockylinux 10 3.新增Debian Forky,CentOS_10-Stream"
 }
