@@ -97,7 +97,24 @@ echo -e "${GREEN}尝试禁用无用检测${RES}"
 ln -s ~/SakiSP-NEXT/sakispnext.sh /usr/bin/sakispnext 2>/dev/null
 chmod 777 /usr/bin/sakispnext 2>/dev/null
 touch ~/.hushlogin
-if [ "$current_distro" = "archarm" ] || [ "$current_distro" = "manjaro" ] || [ "$current_distro" = "endeavouros" ]; then
+
+whiptail_available=0
+if [ "$current_distro" = "ubuntu" ] || [ "$current_distro" = "debian" ] || [ "$current_distro" = "kali" ]; then
+    echo -e "${INFO}检测到支持 whiptail 的系统（$current_distro），正在检查是否安装...${RES}"
+    if command -v whiptail >/dev/null 2>&1; then
+        whiptail_available=1
+        echo -e "${SUSSEC}whiptail 已安装${RES}"
+    else
+        echo -e "${WORRY}whiptail 未安装，正在通过 apt 安装...${RES}"
+        self_install $package_manager whiptail
+        if command -v whiptail >/dev/null 2>&1; then
+            whiptail_available=1
+            echo -e "${SUSSEC}whiptail 安装完成${RES}"
+        else
+            echo -e "${ERROR}whiptail 安装失败${RES}"
+        fi
+    fi
+elif [ "$current_distro" = "archarm" ] || [ "$current_distro" = "manjaro" ] || [ "$current_distro" = "endeavouros" ]; then
     echo -e "${INFO}先执行系统更新...${RES}"
     pacman -Syu --noconfirm
     echo -e "${INFO}系统更新完成，正在安装Arch依赖...${RES}"
@@ -108,14 +125,19 @@ if [ "$current_distro" = "archarm" ] || [ "$current_distro" = "manjaro" ] || [ "
     locale-gen
     echo "LANG=zh_CN.UTF-8" >/etc/locale.conf
     echo -e "${SUSSEC}中文环境配置完成${RES}"
+    # Arch 可选装 whiptail（通过 libnewt 依赖，不强制）
     if command -v whiptail >/dev/null 2>&1; then
         whiptail_available=1
     else
-        echo -e "${WORRY}whiptail安装失败，将跳过SakiSP安装询问${RES}"
-        whiptail_available=0
+        echo -e "${WORRY}whiptail 未安装（Arch 非必需），将跳过SakiSP安装询问${RES}"
     fi
 else
+    echo -e "${WORRY}当前系统（$current_distro）不支持 whiptail，将跳过 SakiSP 安装步骤${RES}"
     whiptail_available=0
+fi
+
+
+if [ "$current_distro" != "archarm" ] && [ "$current_distro" != "manjaro" ] && [ "$current_distro" != "endeavouros" ]; then
     if [ "$current_distro" = "ubuntu" ] || [ "$current_distro" = "debian" ] || [ "$current_distro" = "kali" ] || [ "$current_distro" = "centos" ] || [ "$current_distro" = "rocky" ]; then
         echo -e "${INFO}正在安装对应依赖...${RES}"
         self_install $package_manager language-pack-zh-hans
@@ -131,6 +153,7 @@ else
         self_install $package_manager bc
     fi
 fi
+
 echo -e "${INFO}准备检测系统发行版${RES}"
 sleep 2
 if [ -f /etc/os-release ] && [ "$current_distro" != "archarm" ] && [ "$current_distro" != "manjaro" ] && [ "$current_distro" != "endeavouros" ]; then
@@ -155,20 +178,22 @@ elif [ "$current_distro" != "archarm" ] && [ "$current_distro" != "manjaro" ] &&
     sleep 2
     clear
 fi
+
+# SakiSP 安装逻辑（仅 whiptail 可用时执行，无改动）
 if [ $whiptail_available -eq 1 ]; then
     whiptail --title "安装SakiSP" --yesno "是否需要安装SakiSP？该工具可用于很大用途" 10 60
     if [ $? -eq 0 ]; then
+        clear
         echo -e "${INFO} 用户选择安装SakiSP，正在克隆仓库...${RES}"
         git clone https://gh.xmly.dev/https://github.com/YingLi606/SakiSP.git 2>/dev/null
         sleep 2
-        clear
         echo -e "${SUSSEC} SakiSP已完成安装步骤，即将进入下一步...${RES}"
         sleep 2
     else
-        clear
         echo -e "${INFO} 用户选择无需安装SakiSP，该步骤跳过${RES}"
     fi
 fi
+
 echo -e "${INFO}现在，请选择你需要更换的国内软件源${RES}"
 sleep 3
 sudo bash -c "bash <(curl -sSL https://linuxmirrors.cn/main.sh)" && echo -e "${GREEN}✅ 软件源切换执行完成，正在进入下一步...${RES}"
@@ -181,11 +206,9 @@ echo -e "───────────────────────�
 echo -e "  ✅  建议国内用户选择 Gitee 源           "
 echo -e "  ✅  安装过程中建议全程输入 Y 确认       "
 echo -e "─────────────────────────────────────────"
-
 echo -e "\n❓ 是否需要安装 TMOE TOOL？${RES}"
 echo -e "📌 请输入：(y/n)"
 read -r user_choice
-
 if [[ "$user_choice" =~ ^[Yy]$ ]]; then
     echo -e "\n${INFO}🚀 用户选择安装，正在准备启动安装程序...${RES}"
     sleep 2
@@ -206,4 +229,3 @@ else
     sleep 3
 fi
 exit
-

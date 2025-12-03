@@ -1,5 +1,5 @@
 {
-    "version": "9.0.3",
+    "version": "9.0.4",
     "git_clone": "YingLi606/SakiSP-NEXT",
     "description": "1.修复了Arch安装过程问题（仅支持arm架构） 2.人类验证机制更新 3.修复已知问题"
 }
