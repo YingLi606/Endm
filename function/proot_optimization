@@ -100,12 +100,12 @@ touch ~/.hushlogin
 
 whiptail_available=0
 if [ "$current_distro" = "ubuntu" ] || [ "$current_distro" = "debian" ] || [ "$current_distro" = "kali" ]; then
-    echo -e "${INFO}检测到支持 whiptail 的系统（$current_distro），正在检查是否安装...${RES}"
+    echo -e "${INFO}检测到支持 whiptail 的系统（$current_distro），正在检查是否已安装...${RES}"
     if command -v whiptail >/dev/null 2>&1; then
         whiptail_available=1
         echo -e "${SUSSEC}whiptail 已安装${RES}"
     else
-        echo -e "${WORRY}whiptail 未安装，正在通过 apt 安装...${RES}"
+        echo -e "${WORRY}whiptail 未安装，正在开始安装...${RES}"
         self_install $package_manager whiptail
         if command -v whiptail >/dev/null 2>&1; then
             whiptail_available=1
@@ -115,9 +115,9 @@ if [ "$current_distro" = "ubuntu" ] || [ "$current_distro" = "debian" ] || [ "$c
         fi
     fi
 elif [ "$current_distro" = "archarm" ] || [ "$current_distro" = "manjaro" ] || [ "$current_distro" = "endeavouros" ]; then
-    echo -e "${INFO}先执行系统更新...${RES}"
+    echo -e "${GREEN}执行系统更新${RES}"
     pacman -Syu --noconfirm
-    echo -e "${INFO}系统更新完成，正在安装Arch依赖...${RES}"
+    echo -e "${INFO}系统更新完成，正在安装相关依赖...${RES}"
     pacman -S --noconfirm libnewt adobe-source-han-serif-cn-fonts wqy-zenhei wget git jq curl bc
     echo -e "${SUSSEC}继续后续步骤${RES}"
     echo -e "${INFO}正在配置Arch系统中文环境...${RES}"
@@ -125,11 +125,10 @@ elif [ "$current_distro" = "archarm" ] || [ "$current_distro" = "manjaro" ] || [
     locale-gen
     echo "LANG=zh_CN.UTF-8" >/etc/locale.conf
     echo -e "${SUSSEC}中文环境配置完成${RES}"
-    # Arch 可选装 whiptail（通过 libnewt 依赖，不强制）
     if command -v whiptail >/dev/null 2>&1; then
         whiptail_available=1
     else
-        echo -e "${WORRY}whiptail 未安装（Arch 非必需），将跳过SakiSP安装询问${RES}"
+        echo -e "${WORRY}whiptail 安装失败，将跳过SakiSP安装询问${RES}"
     fi
 else
     echo -e "${WORRY}当前系统（$current_distro）不支持 whiptail，将跳过 SakiSP 安装步骤${RES}"
@@ -194,6 +193,7 @@ if [ $whiptail_available -eq 1 ]; then
     fi
 fi
 
+clear
 echo -e "${INFO}现在，请选择你需要更换的国内软件源${RES}"
 sleep 3
 sudo bash -c "bash <(curl -sSL https://linuxmirrors.cn/main.sh)" && echo -e "${GREEN}✅ 软件源切换执行完成，正在进入下一步...${RES}"

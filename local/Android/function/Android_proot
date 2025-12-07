@@ -325,8 +325,8 @@ install_proot() {
 	proot --link2symlink tar --overwrite -xJf ${HOME}/SakiSP-NEXT/download/${os_name}.tar.xz -C ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/ --exclude='dev' || :
 	chmod 777 "${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/"
 	chmod 777 "${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/"
-	echo -e "${GREEN}复制脚本到容器${RES}"
-	log "复制脚本到容器"
+	echo -e "${GREEN}复制脚本到容器（Arch暂不支持Linux功能）${RES}"
+	log "复制脚本到容器（Arch暂不支持Linux功能）"
 	mkdir -p ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
 	mkdir -p ${HOME}/.termux/SakiSP-NEXT/.重要文件夹/sys/.empty
 	mkdir -p ${HOME}/.termux/SakiSP-NEXT/.重要文件夹/dev/shm

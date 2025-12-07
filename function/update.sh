@@ -110,13 +110,6 @@ if [ "$(printf '%s\n' "$REMOTE_VERSION" "$LOCAL_VERSION" | sort -V | tail -n1)" 
 	chmod 777 ${HOME}/SakiSP-NEXT/sakispnext.sh
 	echo "更新完成！重启脚本后，请在主菜单里退出脚本且重新启动并选择默认更新源！将在3秒后重启脚本... （当前版本: $REMOTE_VERSION）"
 	sleep 3
-	log 更新成功
-	# 倒计时3秒后重启脚本，最后清空终端
-	sleep 1
-	echo "2秒后重启..."
-	sleep 1
-	echo "1秒后重启..."
-	sleep 1
 	clear
 	exit 1
 	${HOME}/SakiSP-NEXT/sakispnext.sh
