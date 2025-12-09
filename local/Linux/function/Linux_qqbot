@@ -21,18 +21,18 @@ startNapCatQQ() {
 		if [ "${system_os_type2}" = "Bookworm_Debian_12" ]; then
 			log "启动NapCatQQ"
 			if [ "${QQbot}" = "" ]; then
-				read -e -p "请输入您的选择：" QQbot
+				read -e -p "请输入您的QQ号（建议用小号）：" QQbot
 				log "QQbot为空"
 				Modify_the_variable QQbot "${QQbot}" "${HOME}/SakiSP-NEXT/config/config.sh"
 			fi
 			case "${1}" in
 			--Background | -B)
 				log "后台启动NapCatQQ"
-				screen -dmS napcat bash -c "xvfb-run -a qq --no-sandbox -q ${QQbot}"
+				screen -dmS napcat bash -c "xvfb-run -a ${HOME}/Napcat/opt/QQ/qq --no-sandbox -q ${QQbot}"
 				;;
 			*)
 				log "启动NapCatQQ"
-				xvfb-run -a qq --no-sandbox -q "${QQbot}"
+				xvfb-run -a ${HOME}/Napcat/opt/QQ/qq --no-sandbox "${QQbot}"
 				;;
 			esac
 
