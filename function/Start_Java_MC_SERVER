@@ -21,20 +21,20 @@ if [ -z "$result" ]; then
 	echo -e "${ERROR}请先安装java启动"
 	exit
 else
-	cd ${HOME}/.termux/SakiSP-NEXT/MCserver/${Core_version}/${Game_version}
+	cd ${HOME}/.termux/SakiRC/MCserver/${Core_version}/${Game_version}
 	if [ "$Core_version" = "Forge" ] && [ ! -f "forge_server_yes.txt" ]; then
 		echo -e "${INFO}Forge核心执行额外安装步骤"
-		if java -jar ${HOME}/.termux/SakiSP-NEXT/MCserver/${Core_version}/${Game_version}/${Core_version}_${Game_version}_server.jar nogui --installServer; then
-			rm -rfv ${HOME}/.termux/SakiSP-NEXT/MCserver/${Core_version}/${Game_version}/${Core_version}_${Game_version}_server.jar
+		if java -jar ${HOME}/.termux/SakiRC/MCserver/${Core_version}/${Game_version}/${Core_version}_${Game_version}_server.jar nogui --installServer; then
+			rm -rfv ${HOME}/.termux/SakiRC/MCserver/${Core_version}/${Game_version}/${Core_version}_${Game_version}_server.jar
 			echo -e "${INFO}forge安装服务器成功 转换脚本可识别的文件"
 			echo -e "${INFO}forge安装服务器成功" >forge_server_yes.txt
 		fi
 		if [ -f "run.sh" ]; then
 			echo -e "
-cd ${HOME}/.termux/SakiSP-NEXT/MCserver/${Core_version}/${Game_version}/
-echo -e "eula=true" > ${HOME}/.termux/SakiSP-NEXT/MCserver/${Core_version}/${Game_version}/eula.txt
+cd ${HOME}/.termux/SakiRC/MCserver/${Core_version}/${Game_version}/
+echo -e "eula=true" > ${HOME}/.termux/SakiRC/MCserver/${Core_version}/${Game_version}/eula.txt
 source run.sh
-" >${HOME}/.termux/SakiSP-NEXT/MCserver/${Core_version}/${Game_version}/start.sh
+" >${HOME}/.termux/SakiRC/MCserver/${Core_version}/${Game_version}/start.sh
 			exit 0
 		fi
 	fi
@@ -62,10 +62,10 @@ $(ls /usr/lib/jvm/*/bin/java) :" wherejava
 
 		# 合成并执行java -jar命令
 		echo -e "
-cd ${HOME}/.termux/SakiSP-NEXT/MCserver/${Core_version}/${Game_version}/
-echo -e "eula=true" > ${HOME}/.termux/SakiSP-NEXT/MCserver/${Core_version}/${Game_version}/eula.txt
-${wherejava} -Xms"$min_memory" -Xmx"$max_memory" -jar "${HOME}/.termux/SakiSP-NEXT/MCserver/${Core_version}/${Game_version}/${Core_version}_${Game_version}_server.jar"
-" >${HOME}/.termux/SakiSP-NEXT/MCserver/${Core_version}/${Game_version}/start.sh
+cd ${HOME}/.termux/SakiRC/MCserver/${Core_version}/${Game_version}/
+echo -e "eula=true" > ${HOME}/.termux/SakiRC/MCserver/${Core_version}/${Game_version}/eula.txt
+${wherejava} -Xms"$min_memory" -Xmx"$max_memory" -jar "${HOME}/.termux/SakiRC/MCserver/${Core_version}/${Game_version}/${Core_version}_${Game_version}_server.jar"
+" >${HOME}/.termux/SakiRC/MCserver/${Core_version}/${Game_version}/start.sh
 		;;
 	2)
 		echo "${INFO}返回上一级"

@@ -6,7 +6,7 @@ open_debian_os_list() {
 	sleep 0.1
 	echo -e "\e[92m1. 🟢 Trixie（Debian 13 稳定版）\e[0m"
 	sleep 0.1
-	echo -e "\e[92m2. ⚪️ Forky（Debian 13 滚动更新版）\e[0m"	
+	echo -e "\e[92m2. ⚪️ Forky（Debian 13 滚动更新版，不建议）\e[0m"	
 	sleep 0.1
 	echo -e "\e[93m3. 🟡 Bookworm（Debian 12）\e[0m"
 	sleep 0.1
@@ -57,8 +57,8 @@ open_kali_os_list() {
 		os_name=Kali
 		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/kali/current/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
 		Download_proot_url=${Proot_os_download_source}/kali/current/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
-		download_file="${HOME}/SakiSP-NEXT/download/${os_name}.tar.xz"
-		mkdir -p "${HOME}/SakiSP-NEXT/download"
+		download_file="${HOME}/SakiRC/download/${os_name}.tar.xz"
+		mkdir -p "${HOME}/SakiRC/download"
 		echo -e "\e[94m 正在下载Kali系统镜像... \e[0m"
 		if curl -L -C - -# -o "${download_file}" "${Download_proot_url}"; then
 			echo -e "\e[92m Kali系统镜像下载成功，存储路径：${download_file} \e[0m"
@@ -194,8 +194,8 @@ open_archlinux_os_list() {
 		os_name=ArchLinux
 		Download_proot_NAME=$(curl -s --connect-timeout 10 --max-time 20 "${Proot_os_download_source}/archlinux/current/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
 		Download_proot_url=${Proot_os_download_source}/archlinux/current/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
-		download_file="${HOME}/SakiSP-NEXT/download/${os_name}.tar.xz"
-		mkdir -p "${HOME}/SakiSP-NEXT/download"
+		download_file="${HOME}/SakiRC/download/${os_name}.tar.xz"
+		mkdir -p "${HOME}/SakiRC/download"
 		echo -e "\e[94m正在下载Arch系统镜像... \e[0m"
 		if curl -L -C - -# -o "${download_file}" --connect-timeout 10 --max-time 300 "${Download_proot_url}"; then
 			echo -e "\e[92m✅ Arch系统镜像下载成功，存储路径：${download_file} \e[0m"
@@ -232,7 +232,7 @@ install_proot() {
 		exit
 		;;
 	esac
-	mkdir -p "${HOME}/.termux/SakiSP-NEXT/proot"
+	mkdir -p "${HOME}/.termux/SakiRC/proot"
 	Proot_os_download_source="https://sgp1lxdmirror01.do.letsbuildthe.cloud/images"
 	clear
 	echo -e "\n\e[92m🎉 \e[1m【选择容器系统类型】\e[0m"
@@ -308,18 +308,18 @@ install_proot() {
 			((counter++))
 		done
 	}
-	download_file="${HOME}/SakiSP-NEXT/download/${os_name}.tar.xz"
+	download_file="${HOME}/SakiRC/download/${os_name}.tar.xz"
 	if [ -f "$download_file" ] && [ $(du -b "$download_file" | cut -f1) -lt 41943040 ]; then
 		echo -e "\e[93m⚠️  警告：${download_file} 可能已经损坏 \e[0m"
-		log "\"${HOME}/SakiSP-NEXT/download/${os_name}.tar.xz\"文件损坏，重新下载"
+		log "\"${HOME}/SakiRC/download/${os_name}.tar.xz\"文件损坏，重新下载"
 		log "下载url:\"${Download_proot_url}\" 保存到 \"$download_file\""
 		counter=0
 		Maximum_number_of_attempts=2
 		wget_proot_url
 	elif [ -f "$download_file" ]; then
-		log "\"${HOME}/SakiSP-NEXT/download/${os_name}.tar.xz\"存在且大于40MBB"
+		log "\"${HOME}/SakiRC/download/${os_name}.tar.xz\"存在且大于40MBB"
 	else
-		log "\"${HOME}/SakiSP-NEXT/download/${os_name}.tar.xz\"不存在"
+		log "\"${HOME}/SakiRC/download/${os_name}.tar.xz\"不存在"
 		log "下载url:\"${Download_proot_url}\" 保存到 \"$download_file\""
 		counter=0
 		Maximum_number_of_attempts=2
@@ -327,35 +327,35 @@ install_proot() {
 	fi
 	echo -e "\e[94m提示：您可以使用 rm -rfv $download_file 来节省存储空间 \e[0m"
 	unset LD_PRELOAD
-	mkdir -p ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}
-	log "解压\"${HOME}/SakiSP-NEXT/download/${os_name}.tar.xz\""
-	proot --link2symlink tar --overwrite -xJf ${HOME}/SakiSP-NEXT/download/${os_name}.tar.xz -C ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/ --exclude='dev' || :
-	chmod 777 "${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/"
-	chmod 777 "${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/"
+	mkdir -p ${HOME}/.termux/SakiRC/proot/${os_name}
+	log "解压\"${HOME}/SakiRC/download/${os_name}.tar.xz\""
+	proot --link2symlink tar --overwrite -xJf ${HOME}/SakiRC/download/${os_name}.tar.xz -C ${HOME}/.termux/SakiRC/proot/${os_name}/ --exclude='dev' || :
+	chmod 777 "${HOME}/.termux/SakiRC/proot/${os_name}/root/"
+	chmod 777 "${HOME}/.termux/SakiRC/proot/${os_name}/proc/"
 	echo -e "${GREEN}复制脚本到容器（Arch暂不支持Linux功能）${RES}"
 	log "复制脚本到容器（Arch暂不支持Linux功能）"
-	mkdir -p ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
-	mkdir -p ${HOME}/.termux/SakiSP-NEXT/.重要文件夹/sys/.empty
-	mkdir -p ${HOME}/.termux/SakiSP-NEXT/.重要文件夹/dev/shm
-	cp -r ${HOME}/SakiSP-NEXT/config ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
-	cp -r ${HOME}/SakiSP-NEXT/function ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
-	cp -r ${HOME}/SakiSP-NEXT/local ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
-	cp ${HOME}/SakiSP-NEXT/sakispnext.sh ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
-	cp ${HOME}/SakiSP-NEXT/git_push.sh ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/SakiSP-NEXT
-	cp ${HOME}/SakiSP-NEXT/function/proot_proc/.* ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/
-	cp ${HOME}/SakiSP-NEXT/function/proot_optimization ${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/root/优化.sh
+	mkdir -p ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
+	mkdir -p ${HOME}/.termux/SakiRC/.重要文件夹/sys/.empty
+	mkdir -p ${HOME}/.termux/SakiRC/.重要文件夹/dev/shm
+	cp -r ${HOME}/SakiRC/config ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
+	cp -r ${HOME}/SakiRC/function ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
+	cp -r ${HOME}/SakiRC/local ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
+	cp ${HOME}/SakiRC/sakispnext.sh ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
+	cp ${HOME}/SakiRC/git_push.sh ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
+	cp ${HOME}/SakiRC/function/proot_proc/.* ${HOME}/.termux/SakiRC/proot/${os_name}/proc/
+	cp ${HOME}/SakiRC/function/proot_optimization ${HOME}/.termux/SakiRC/proot/${os_name}/root/优化.sh
 	proot \
 		--link2symlink -0 \
-		--rootfs=${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/ \
+		--rootfs=${HOME}/.termux/SakiRC/proot/${os_name}/ \
 		--bind=/dev \
 		--bind=/sys \
 		--bind=/proc \
-		--bind="${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.loadavg:/proc/loadavg" \
-		--bind="${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.version:/proc/version" \
-		--bind="${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.uptime:/proc/uptime" \
-		--bind="${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.stat:/proc/stat" \
-		--bind="${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.vmstat:/proc/vmstat" \
-		--bind="${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.sysctl_entry_cap_last_cap:/proc/sysctl_entry_cap_last_cap" \
+		--bind="${HOME}/.termux/SakiRC/proot/${os_name}/proc/.loadavg:/proc/loadavg" \
+		--bind="${HOME}/.termux/SakiRC/proot/${os_name}/proc/.version:/proc/version" \
+		--bind="${HOME}/.termux/SakiRC/proot/${os_name}/proc/.uptime:/proc/uptime" \
+		--bind="${HOME}/.termux/SakiRC/proot/${os_name}/proc/.stat:/proc/stat" \
+		--bind="${HOME}/.termux/SakiRC/proot/${os_name}/proc/.vmstat:/proc/vmstat" \
+		--bind="${HOME}/.termux/SakiRC/proot/${os_name}/proc/.sysctl_entry_cap_last_cap:/proc/sysctl_entry_cap_last_cap" \
 		--kernel-release="5.15.0" \
 		-w /root /usr/bin/env \
 		-i HOME=/root \
@@ -379,7 +379,7 @@ install_proot() {
 	log "退出容器"
 }
 start_proot() {
-	list_dir ${HOME}/.termux/SakiSP-NEXT/proot
+	list_dir ${HOME}/.termux/SakiRC/proot
 	case $user_choice in
 	0)
 		echo -e "${RED}QUIT${RES}"
@@ -403,15 +403,15 @@ start_proot() {
 			--bind=/data/dalvik-cache \
 			--bind=/data/app \
 			--bind=/proc:/proc \
-			--bind=${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.sysctl_inotify_max_user_watches:/proc/sys/fs/inotify/max_user_watches \
-			--bind=${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.sysctl_entry_cap_last_cap:/proc/sys/kernel/cap_last_cap \
-			--bind=${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.vmstat:/proc/vmstat \
-			--bind=${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.version:/proc/version \
-			--bind=${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.uptime:/proc/uptime \
-			--bind=${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.stat:/proc/stat \
-			--bind=${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/proc/.loadavg:/proc/loadavg \
-			--bind=${HOME}/.termux/SakiSP-NEXT/.重要文件夹/sys/.empty:/sys/fs/selinux \
-			--bind=${HOME}/.termux/SakiSP-NEXT/.重要文件夹/dev/shm:/dev/shm \
+			--bind=${HOME}/.termux/SakiRC/proot/${os_name}/proc/.sysctl_inotify_max_user_watches:/proc/sys/fs/inotify/max_user_watches \
+			--bind=${HOME}/.termux/SakiRC/proot/${os_name}/proc/.sysctl_entry_cap_last_cap:/proc/sys/kernel/cap_last_cap \
+			--bind=${HOME}/.termux/SakiRC/proot/${os_name}/proc/.vmstat:/proc/vmstat \
+			--bind=${HOME}/.termux/SakiRC/proot/${os_name}/proc/.version:/proc/version \
+			--bind=${HOME}/.termux/SakiRC/proot/${os_name}/proc/.uptime:/proc/uptime \
+			--bind=${HOME}/.termux/SakiRC/proot/${os_name}/proc/.stat:/proc/stat \
+			--bind=${HOME}/.termux/SakiRC/proot/${os_name}/proc/.loadavg:/proc/loadavg \
+			--bind=${HOME}/.termux/SakiRC/.重要文件夹/sys/.empty:/sys/fs/selinux \
+			--bind=${HOME}/.termux/SakiRC/.重要文件夹/dev/shm:/dev/shm \
 			--bind=/sys \
 			--bind=/proc/self/fd/2:/dev/stderr \
 			--bind=/proc/self/fd/1:/dev/stdout \
@@ -427,7 +427,7 @@ start_proot() {
 			--kill-on-exit \
 			--cwd=/root \
 			--change-id=0:0 \
-			--rootfs=${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/ \
+			--rootfs=${HOME}/.termux/SakiRC/proot/${os_name}/ \
 			/usr/bin/env -i \
 			PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games \
 			TERM=xterm-256color \
@@ -476,7 +476,7 @@ start_proot() {
 }
 
 rm_proot() {
-	list_dir ${HOME}/.termux/SakiSP-NEXT/proot
+	list_dir ${HOME}/.termux/SakiRC/proot
 	case $user_choice in
 	0)
 		echo -e "${RED}Quit${RES}"
@@ -520,8 +520,8 @@ rm_proot() {
 		if [ "$user_input" -eq "$correct_result" ]; then
 			echo -e "\e[92m✅ 验证成功！继续操作 \e[0m"
 			sleep 2
-			chmod 777 -R "${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/"
-			rm -rfv "${HOME}/.termux/SakiSP-NEXT/proot/${os_name}/"
+			chmod 777 -R "${HOME}/.termux/SakiRC/proot/${os_name}/"
+			rm -rfv "${HOME}/.termux/SakiRC/proot/${os_name}/"
 			echo -e "\e[92m✅ 删除完成，正在退出 \e[0m"
 			sleep 2
 			clear

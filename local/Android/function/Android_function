@@ -1,6 +1,6 @@
 garbage_collection() {
-    target_dir="${HOME}/SakiSP-NEXT/download"
-    app_dir="${HOME}/SakiSP-NEXT/app"
+    target_dir="${HOME}/SakiRC/download"
+    app_dir="${HOME}/SakiRC/app"
     directories=("$target_dir" "$app_dir")
 
     for dir in "${directories[@]}"; do

@@ -161,21 +161,21 @@ zerotermux_install() {
         pkg install -y aria2 > /dev/null 2>&1
     fi
 
-    local APP_DIR="$HOME/SakiSP-NEXT/app"
+    local APP_DIR="$HOME/SakiRC/app"
     if [ ! -d "$APP_DIR" ]; then
         mkdir -p "$APP_DIR"
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
    
     local DOWNLOAD_URL="https://gh.xmly.dev/https://github.com/hanxinhao000/ZeroTermux/releases/download/ZeroTermux-0.118.3.49/ZeroTermux-0.118.3.49-arm64-v8a-debug.apk"
-    local SAVE_PATH="SakiSP-NEXT/app/ZeroTermux-0.118.3.49-arm64-v8a-debug.apk"
+    local SAVE_PATH="SakiRC/app/ZeroTermux-0.118.3.49-arm64-v8a-debug.apk"
 
     echo -e "\033[36m=== 开始多线程下载 ZeroTermux 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
     if [ $? -eq 0 ]; then
-        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiSP-NEXT/app 目录里找到即可\033[0m"
+        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiRC/app 目录里找到即可\033[0m"
         sleep 3
     else
         echo -e "\033[31m❌ 下载失败！5秒后退出...\033[0m"
@@ -191,21 +191,21 @@ qq_install() {
         pkg install -y aria2 > /dev/null 2>&1
     fi
 
-    local APP_DIR="$HOME/SakiSP-NEXT/app"
+    local APP_DIR="$HOME/SakiRC/app"
     if [ ! -d "$APP_DIR" ]; then
         mkdir -p "$APP_DIR"
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
     
     local DOWNLOAD_URL="https://downv6.qq.com/qqweb/QQ_1/android_apk/9.2.50_ccff0d6304664ea9.apk"
-    local SAVE_PATH="SakiSP-NEXT/app/9.2.50_ccff0d6304664ea9.apk"
+    local SAVE_PATH="SakiRC/app/9.2.50_ccff0d6304664ea9.apk"
 
     echo -e "\033[36m=== 开始多线程下载 QQ 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
     if [ $? -eq 0 ]; then
-        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiSP-NEXT/app 目录里找到即可\033[0m"
+        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiRC/app 目录里找到即可\033[0m"
         sleep 3
     else
         echo -e "\033[31m❌ 下载失败！5秒后退出...\033[0m"
@@ -221,21 +221,21 @@ wechat_install() {
         pkg install -y aria2 > /dev/null 2>&1
     fi
 
-    local APP_DIR="$HOME/SakiSP-NEXT/app"
+    local APP_DIR="$HOME/SakiRC/app"
     if [ ! -d "$APP_DIR" ]; then
         mkdir -p "$APP_DIR"
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
     
     local DOWNLOAD_URL="https://dldir1v6.qq.com/weixin/android/weixin8066android2980_0x28004234_arm64.apk"
-    local SAVE_PATH="SakiSP-NEXT/app/weixin8066android2980_0x28004234_arm64.apk"
+    local SAVE_PATH="SakiRC/app/weixin8066android2980_0x28004234_arm64.apk"
 
     echo -e "\033[36m=== 开始多线程下载 微信 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
     if [ $? -eq 0 ]; then
-        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiSP-NEXT/app 目录里找到即可\033[0m"
+        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiRC/app 目录里找到即可\033[0m"
         sleep 3
     else
         echo -e "\033[31m❌ 下载失败！5秒后退出...\033[0m"
@@ -251,21 +251,21 @@ tim_install() {
         pkg install -y aria2 > /dev/null 2>&1
     fi
 
-    local APP_DIR="$HOME/SakiSP-NEXT/app"
+    local APP_DIR="$HOME/SakiRC/app"
     if [ ! -d "$APP_DIR" ]; then
         mkdir -p "$APP_DIR"
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
     
     local DOWNLOAD_URL="https://downv6.ydcdn.tcdnos.com/qqweb/QQ_1/android_apk/tim_4.1.0.4050.apk"
-    local SAVE_PATH="SakiSP-NEXT/app/tim_4.1.0.4050.apk"
+    local SAVE_PATH="SakiRC/app/tim_4.1.0.4050.apk"
 
     echo -e "\033[36m=== 开始多线程下载 TIM 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
     if [ $? -eq 0 ]; then
-        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiSP-NEXT/app 目录里找到即可\033[0m"
+        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiRC/app 目录里找到即可\033[0m"
         sleep 3
     else
         echo -e "\033[31m❌ 下载失败！5秒后退出...\033[0m"
@@ -281,21 +281,21 @@ doubao_install() {
         pkg install -y aria2 > /dev/null 2>&1
     fi
 
-    local APP_DIR="$HOME/SakiSP-NEXT/app"
+    local APP_DIR="$HOME/SakiRC/app"
     if [ ! -d "$APP_DIR" ]; then
         mkdir -p "$APP_DIR"
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
    
     local DOWNLOAD_URL="https://lf9-apk.ugapk.cn/package/apk/nova_ai/22629_11040001/nova_ai_46006059a_v22629_11040001_6fb4_1765275161.apk"
-    local SAVE_PATH="SakiSP-NEXT/app/nova_ai_46006059a_v22629_11040001_6fb4_1765275161.apk"
+    local SAVE_PATH="SakiRC/app/nova_ai_46006059a_v22629_11040001_6fb4_1765275161.apk"
 
     echo -e "\033[36m=== 开始多线程下载 豆包 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
     if [ $? -eq 0 ]; then
-        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiSP-NEXT/app 目录里找到即可\033[0m"
+        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiRC/app 目录里找到即可\033[0m"
         sleep 3
     else
         echo -e "\033[31m❌ 下载失败！5秒后退出...\033[0m"
@@ -311,21 +311,21 @@ hunyuan_install() {
         pkg install -y aria2 > /dev/null 2>&1
     fi
 
-    local APP_DIR="$HOME/SakiSP-NEXT/app"
+    local APP_DIR="$HOME/SakiRC/app"
     if [ ! -d "$APP_DIR" ]; then
         mkdir -p "$APP_DIR"
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
    
     local DOWNLOAD_URL="https://cdn-hybrid-prod.hunyuan.tencent.com/Android/business/yuanbao-release-prod-signed-5040.apk"
-    local SAVE_PATH="SakiSP-NEXT/app/yuanbao-release-prod-signed-5040.apk"
+    local SAVE_PATH="SakiRC/app/yuanbao-release-prod-signed-5040.apk"
 
     echo -e "\033[36m=== 开始多线程下载 元宝 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
     if [ $? -eq 0 ]; then
-        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiSP-NEXT/app 目录里找到即可\033[0m"
+        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiRC/app 目录里找到即可\033[0m"
         sleep 3
     else
         echo -e "\033[31m❌ 下载失败！5秒后退出...\033[0m"
@@ -341,21 +341,21 @@ autoglm_install() {
         pkg install -y aria2 > /dev/null 2>&1
     fi
 
-    local APP_DIR="$HOME/SakiSP-NEXT/app"
+    local APP_DIR="$HOME/SakiRC/app"
     if [ ! -d "$APP_DIR" ]; then
         mkdir -p "$APP_DIR"
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
    
     local DOWNLOAD_URL="https://autoglm.aminer.cn/web/deep_research/apk/autoglm.apk"
-    local SAVE_PATH="SakiSP-NEXT/app/autoglm.apk"
+    local SAVE_PATH="SakiRC/app/autoglm.apk"
 
     echo -e "\033[36m=== 开始多线程下载 AutoGLM 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
     if [ $? -eq 0 ]; then
-        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiSP-NEXT/app 目录里找到即可\033[0m"
+        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiRC/app 目录里找到即可\033[0m"
         sleep 3
     else
         echo -e "\033[31m❌ 下载失败！5秒后退出...\033[0m"
@@ -371,21 +371,21 @@ qwen_install() {
         pkg install -y aria2 > /dev/null 2>&1
     fi
 
-    local APP_DIR="$HOME/SakiSP-NEXT/app"
+    local APP_DIR="$HOME/SakiRC/app"
     if [ ! -d "$APP_DIR" ]; then
         mkdir -p "$APP_DIR"
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
    
     local DOWNLOAD_URL="https://download.qwen.ai/android/QwenChat_release.apk"
-    local SAVE_PATH="SakiSP-NEXT/app/QwenChat_release.apk"
+    local SAVE_PATH="SakiRC/app/QwenChat_release.apk"
 
     echo -e "\033[36m=== 开始多线程下载 千问 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
     if [ $? -eq 0 ]; then
-        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiSP-NEXT/app 目录里找到即可\033[0m"
+        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiRC/app 目录里找到即可\033[0m"
         sleep 3
     else
         echo -e "\033[31m❌ 下载失败！5秒后退出...\033[0m"

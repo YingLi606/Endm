@@ -1,4 +1,4 @@
-mkdir -p "${HOME}/.termux/SakiSP-NEXT/MCserver"
+mkdir -p "${HOME}/.termux/SakiRC/MCserver"
 download_JAVA() {
 	echo "请选择要安装的java版本（支持多选，用空格分隔）:"
 	options=("quit" $(apt list openjdk-*-jdk 2>/dev/null | awk -F'/' '{print $1}' | grep '^openjdk'))
@@ -129,18 +129,18 @@ install_MC_SERVER() {
 	Download_MC_SERVER_Get_core_version=$(echo $Download_MC_SERVER_url_NO_with_and | jq -r .data.builds[].core_version)
 	Download_MC_SERVER_url_YES_with_and=https://download.fastmirror.net/download/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}/${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]}/${Download_MC_SERVER_Get_core_version}
 	log "组成的mcserver地址:$Download_MC_SERVER_url_YES_with_and"
-	if [ ! -d ${HOME}/.termux/SakiSP-NEXT/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]} ]; then
-		mkdir -p ${HOME}/.termux/SakiSP-NEXT/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}
+	if [ ! -d ${HOME}/.termux/SakiRC/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]} ]; then
+		mkdir -p ${HOME}/.termux/SakiRC/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}
 	fi
-	if [ ! -d ${HOME}/.termux/SakiSP-NEXT/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}/${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]} ]; then
-		mkdir -p ${HOME}/.termux/SakiSP-NEXT/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}/${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]}
+	if [ ! -d ${HOME}/.termux/SakiRC/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}/${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]} ]; then
+		mkdir -p ${HOME}/.termux/SakiRC/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}/${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]}
 	fi
-	if wget -q --show-progress $Download_MC_SERVER_url_YES_with_and -O ${HOME}/.termux/SakiSP-NEXT/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}/${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]}/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}_${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]}_server.jar; then
+	if wget -q --show-progress $Download_MC_SERVER_url_YES_with_and -O ${HOME}/.termux/SakiRC/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}/${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]}/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}_${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]}_server.jar; then
 		log "下载成功"
-		source ${HOME}/SakiSP-NEXT/function/Start_Java_MC_SERVER "${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}" "${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]}" # 版本
+		source ${HOME}/SakiRC/function/Start_Java_MC_SERVER "${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}" "${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]}" # 版本
 	else
 		log "下载失败"
-		rmdir -p ${HOME}/.termux/SakiSP-NEXT/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}/${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]} "${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]}"
+		rmdir -p ${HOME}/.termux/SakiRC/MCserver/${Download_MC_SERVER_class_menu[$((user_choice_Download_MC_SERVER_class_menu - 1))]}/${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]} "${Download_MC_SERVER_versions_menu[$((user_choice_Download_MC_SERVER_versions_menu_list_names - 1))]}"
 	fi
 
 }
@@ -152,7 +152,7 @@ start_MC_SERVER() {
 		download_JAVA
 	fi
 
-	list_dir ${HOME}/.termux/SakiSP-NEXT/MCserver/
+	list_dir ${HOME}/.termux/SakiRC/MCserver/
 	case $user_choice in
 	0)
 		echo -e "${RED}quit${RES}"
@@ -168,7 +168,7 @@ start_MC_SERVER() {
 		;;
 	esac
 
-	list_dir ${HOME}/.termux/SakiSP-NEXT/MCserver/${start_MC_SERVER_class}
+	list_dir ${HOME}/.termux/SakiRC/MCserver/${start_MC_SERVER_class}
 	case $user_choice in
 	0)
 		echo -e "${RED}quit${RES}"
@@ -178,12 +178,12 @@ start_MC_SERVER() {
 		if [ ! $? = 0 ]; then
 			exit
 		fi
-		if [ ! -f ${HOME}/.termux/SakiSP-NEXT/MCserver/${start_MC_SERVER_class}/${list_items[$((user_choice - 1))]}/start.sh ]; then
+		if [ ! -f ${HOME}/.termux/SakiRC/MCserver/${start_MC_SERVER_class}/${list_items[$((user_choice - 1))]}/start.sh ]; then
 			log "未寻找到启动脚本启动配置程序"
-			source ${HOME}/SakiSP-NEXT/function/Start_Java_MC_SERVER ${start_MC_SERVER_class} ${list_items[$((user_choice - 1))]}
+			source ${HOME}/SakiRC/function/Start_Java_MC_SERVER ${start_MC_SERVER_class} ${list_items[$((user_choice - 1))]}
 		fi
 		log "启动mcserver"
-		bash ${HOME}/.termux/SakiSP-NEXT/MCserver/${start_MC_SERVER_class}/${list_items[$((user_choice - 1))]}/start.sh
+		bash ${HOME}/.termux/SakiRC/MCserver/${start_MC_SERVER_class}/${list_items[$((user_choice - 1))]}/start.sh
 		#核心
 		;;
 	esac
@@ -191,7 +191,7 @@ start_MC_SERVER() {
 
 rm_MC_SERVER() {
 	log "准备删除mcserver"
-	list_dir ${HOME}/.termux/SakiSP-NEXT/MCserver/
+	list_dir ${HOME}/.termux/SakiRC/MCserver/
 	case $user_choice in
 	0)
 		echo -e "${RED}quit${RES}"
@@ -204,7 +204,7 @@ rm_MC_SERVER() {
 		rm_MC_SERVER_class=${list_items[$((user_choice - 1))]}
 		;;
 	esac
-	list_dir ${HOME}/.termux/SakiSP-NEXT/MCserver/${rm_MC_SERVER_class}
+	list_dir ${HOME}/.termux/SakiRC/MCserver/${rm_MC_SERVER_class}
 	case $user_choice in
 	0)
 		echo -e "${RED}quit${RES}"
@@ -248,7 +248,7 @@ rm_MC_SERVER() {
 		if [ "$user_input" -eq "$correct_result" ]; then
 			echo -e "\e[92m✅ 验证成功！继续操作\e[0m"
 			sleep 2
-			rm -rfv "${HOME}/.termux/SakiSP-NEXT/MCserver/${rm_MC_SERVER_class}/${list_items[$((user_choice - 1))]}"
+			rm -rfv "${HOME}/.termux/SakiRC/MCserver/${rm_MC_SERVER_class}/${list_items[$((user_choice - 1))]}"
 			log "删除完成"
 		else
 			echo -e "\e[91m❌ 错误！你输入的答案不正确。删除程序将不执行。\e[0m"
@@ -263,17 +263,17 @@ Import_zip_MC_SERVER() {
 	log "准备导入zip格式的mcserver"
 	self_install zip 
 	self_install unzip
-	if [ ! -d ${HOME}/.termux/SakiSP-NEXT/MCserver/导入的MCserver/ ]; then
-		mkdir -p ${HOME}/.termux/SakiSP-NEXT/MCserver/导入的MCserver/
+	if [ ! -d ${HOME}/.termux/SakiRC/MCserver/导入的MCserver/ ]; then
+		mkdir -p ${HOME}/.termux/SakiRC/MCserver/导入的MCserver/
 	fi
 	log "请选择要导入的zip文件"
 	zip_file=$(whiptail --title "选择zip文件以当前系统目录为准" --inputbox "请输入zip文件路径解压后直接为服务器根目录的zip" 10 60 3>&1 1>&2 2>&3)
 	log "选择的zip文件:${zip_file}"		
 	nowtime=$(date +%y-%m-%d-%H:%M:%S)
-	if [ ! -d ${HOME}/.termux/SakiSP-NEXT/MCserver/导入的MCserver/${nowtime}解压后目录/ ]; then
-		mkdir -p ${HOME}/.termux/SakiSP-NEXT/MCserver/导入的MCserver/${nowtime}解压后目录/
+	if [ ! -d ${HOME}/.termux/SakiRC/MCserver/导入的MCserver/${nowtime}解压后目录/ ]; then
+		mkdir -p ${HOME}/.termux/SakiRC/MCserver/导入的MCserver/${nowtime}解压后目录/
 	fi
-	unzip "${zip_file}" -d "${HOME}/.termux/SakiSP-NEXT/MCserver/导入的MCserver/${nowtime}解压后目录/"
+	unzip "${zip_file}" -d "${HOME}/.termux/SakiRC/MCserver/导入的MCserver/${nowtime}解压后目录/"
 	if [ ! $? = 0 ]; then
 	log "导入失败"
 		exit
@@ -281,14 +281,14 @@ Import_zip_MC_SERVER() {
 	log "导入完成"
 } 
 Export_zip_MC_SERVER() {
-	mkdir -p ${HOME}/.termux/SakiSP-NEXT/back
+	mkdir -p ${HOME}/.termux/SakiRC/back
 	log "准备导出zip格式的mcserver"
 	if [ ! -f "$(command -v zip)" ]; then
 		echo -e "${RED}目前并没有任何安装 zip ${RES}"
 		echo -e "没有安装zip"
 		self_install zip
 	fi
-	list_dir ${HOME}/.termux/SakiSP-NEXT/MCserver/
+	list_dir ${HOME}/.termux/SakiRC/MCserver/
 	case $user_choice in
 	0)
 		echo -e "${RED}quit${RES}"
@@ -307,7 +307,7 @@ Export_zip_MC_SERVER() {
 		;;
 	esac
 
-	list_dir ${HOME}/.termux/SakiSP-NEXT/MCserver/${export_MC_SERVER_class}
+	list_dir ${HOME}/.termux/SakiRC/MCserver/${export_MC_SERVER_class}
 	case $user_choice in
 	0)
 		echo -e "${RED}quit${RES}"
@@ -329,14 +329,14 @@ Export_zip_MC_SERVER() {
 		export_zip_name="${export_MC_SERVER_class_bb}_$(date +%Y%m%d_%H%M%S).zip"
 	fi
 
-	if [ ! -d ${HOME}/.termux/SakiSP-NEXT/MCserver/${export_MC_SERVER_class}/${export_MC_SERVER_class_bb} ]; then
+	if [ ! -d ${HOME}/.termux/SakiRC/MCserver/${export_MC_SERVER_class}/${export_MC_SERVER_class_bb} ]; then
 		log "未找到服务器:${export_MC_SERVER_class_bb}"
 		exit
 	fi
 
-	cd ${HOME}/.termux/SakiSP-NEXT/MCserver/${export_MC_SERVER_class}/${export_MC_SERVER_class_bb}
-	if zip -r "${HOME}/.termux/SakiSP-NEXT/back/${export_zip_name}" .; then
-		log "导出完成:${HOME}/.termux/SakiSP-NEXT/back/${export_zip_name}"
+	cd ${HOME}/.termux/SakiRC/MCserver/${export_MC_SERVER_class}/${export_MC_SERVER_class_bb}
+	if zip -r "${HOME}/.termux/SakiRC/back/${export_zip_name}" .; then
+		log "导出完成:${HOME}/.termux/SakiRC/back/${export_zip_name}"
 	else
 		log "导出失败"
 	fi
