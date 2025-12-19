@@ -340,7 +340,7 @@ install_proot() {
 	cp -r ${HOME}/SakiRC/config ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
 	cp -r ${HOME}/SakiRC/function ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
 	cp -r ${HOME}/SakiRC/local ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
-	cp ${HOME}/SakiRC/sakispnext.sh ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
+	cp ${HOME}/SakiRC/sakirc.sh ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
 	cp ${HOME}/SakiRC/git_push.sh ${HOME}/.termux/SakiRC/proot/${os_name}/root/SakiRC
 	cp ${HOME}/SakiRC/function/proot_proc/.* ${HOME}/.termux/SakiRC/proot/${os_name}/proc/
 	cp ${HOME}/SakiRC/function/proot_optimization ${HOME}/.termux/SakiRC/proot/${os_name}/root/优化.sh

@@ -85,7 +85,7 @@ start)
 		;;	
 	4)
 		log "卸载脚本"
-		uninstall_sakispnext
+		uninstall_sakirc
 		;;			
 	5)
 		log "网速测试"

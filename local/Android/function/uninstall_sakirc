@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-uninstall_sakispnext() {
+uninstall_sakirc() {
 RED="\033[31m"
 GREEN="\033[32m"
 YELLOW="\033[33m"
