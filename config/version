@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1",
+    "version": "2.0.0",
     "git_clone": "YingLi606/SakiRC",
-    "description": "1.修复安装Arch Linux系统Proot容器中出现内核不支持Landlock安全沙箱特性问题! 新起点，再出发！"
+    "description": "Android功能: 1.新增Termux工具箱 2.新增切换至TMOE 新起点，再出发！"
 }
