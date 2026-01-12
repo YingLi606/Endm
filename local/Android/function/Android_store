@@ -161,8 +161,8 @@ zerotermux_install() {
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
    
-    local DOWNLOAD_URL="https://gh.xmly.dev/https://github.com/hanxinhao000/ZeroTermux/releases/download/ZeroTermux-0.118.3.49/ZeroTermux-0.118.3.49-arm64-v8a-debug.apk"
-    local SAVE_PATH="SakiRC/app/ZeroTermux-0.118.3.49-arm64-v8a-debug.apk"
+    local DOWNLOAD_URL="https://gh.xmly.dev/https://github.com/hanxinhao000/ZeroTermux/releases/download/ZeroTermux-0.118.3.50/ZeroTermux-0.118.3.50-app-arm64-v8a-debug.apk"
+    local SAVE_PATH="SakiRC/app/ZeroTermux-0.118.3.50-app-arm64-v8a-debug.apk"
 
     echo -e "\033[36m=== 开始多线程下载 ZeroTermux 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
@@ -191,7 +191,7 @@ qq_install() {
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
     
-    local DOWNLOAD_URL="https://downv6.bsy.tcdnos.com/qqweb/QQ_1/android_apk/9.2.55_8ad932464eb5e30b.apk"
+    local DOWNLOAD_URL="https://downv6.qq.com/qqweb/QQ_1/android_apk/9.2.55_8ad932464eb5e30b.apk"
     local SAVE_PATH="SakiRC/app/9.2.55_8ad932464eb5e30b.apk"
 
     echo -e "\033[36m=== 开始多线程下载 QQ 安装包 ===\033[0m"

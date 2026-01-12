@@ -37,7 +37,7 @@ start)
 	;;
 *)
 	Android_menu=$(
-		whiptail --title "SakiRC V2.0.5" --menu "请选择功能" 15 60 8 \
+		whiptail --title "SakiRC V2.1.0" --menu "请选择功能" 15 60 8 \
 			"1" "🍀 管理proot容器" \
 			"2" "♻️ 垃圾清理" \
 			"3" "🐸 Android软件商店（Beta）" \
@@ -45,6 +45,7 @@ start)
 			"5" "🚀 网速测试" \
 			"6" "💼 Termux工具箱" \
 			"7" "🍭 切换至TMOE" \
+			"8" "📱 Proot-distro管理" \
 			"0" "🌚 退出" \
 			"D" "⚠️ debuger"  3>&1 1>&2 2>&3
 	)
@@ -101,6 +102,10 @@ start)
 		log "切换至TMOE"
 		Termux_tmoe
 		;;
+	8)
+		log "Proot-distro管理"
+		Proot_distro
+		;;		
 	D)
 		debuger
 		;;

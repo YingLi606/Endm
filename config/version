@@ -1,5 +1,5 @@
 {
-    "version": "2.0.5",
+    "version": "2.1.0",
     "git_clone": "YingLi606/SakiRC",
-    "description": "Android功能: 1.安卓软件商店更换部分下载链接 2.优化并修复已知问题 新起点，再出发！"
+    "description": "Android功能: 1.新增Proot-distro管理 2.Android软件商店部分应用更换链接 新起点，再出发！"
 }

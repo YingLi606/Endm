@@ -1,0 +1,101 @@
+#!/data/data/com.termux/files/usr/bin/bash
+red(){ echo -e "\033[31m$1\033[0m"; }
+green(){ echo -e "\033[32m$1\033[0m"; }
+
+check_proot_install() {
+    if ! command -v proot-distro >/dev/null 2>&1; then
+        green "检测到未安装proot-distro，正在自动安装..."
+        pkg install proot-distro -y >/dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            red "proot-distro安装失败/中断，脚本退出！"
+            exit 1
+        fi
+        green "proot-distro安装成功！"
+    fi
+}
+
+list_proot_distro() {
+    clear
+    proot-distro list
+    echo
+    green "列出完成，按回车键返回菜单..."
+    read -r
+    clear
+}
+
+install_proot_distro() {
+    clear
+    distro_name=$(whiptail --title "📦 安装Proot-distro容器（注意全部小写）" --inputbox "请输入要安装的系统名称（例：ubuntu/debian/alpine）" 8 55 3>&1 1>&2 2>&3)
+    [ $? -ne 0 ] && { clear; return; }
+    if proot-distro install "$distro_name"; then
+        green "✅ 系统 $distro_name 安装成功！"
+    else
+        red "❌ 输入错误，该系统不存在或安装失败！"
+    fi
+    echo
+    green "按回车键返回菜单..."
+    read -r
+    clear
+}
+
+uninstall_proot_distro() {
+    clear
+    distro_name=$(whiptail --title "🗑️  卸载Proot-distro容器" --inputbox "请输入要卸载的系统名称" 8 50 3>&1 1>&2 2>&3)
+    [ $? -ne 0 ] && { clear; return; }
+    if proot-distro remove "$distro_name"; then
+        green "✅ 系统 $distro_name 卸载成功！"
+        green "正在清空Proot-distro已安装的系统容器缓存..."
+        proot-distro clear-cache
+        green "✅ 缓存已清空！"
+    else
+        red "❌ 输入错误，该系统不存在或卸载失败！"
+    fi
+    echo
+    green "按回车键返回菜单..."
+    read -r
+    clear
+}
+
+start_proot_distro() {
+     clear
+     distro_name=$(whiptail --title "🚀 启动Proot-distro容器" --inputbox "请输入要启动的系统名称" 8 50 3>&1 1>&2 2>&3)
+     [ $? -ne 0 ] && { clear; return; }
+     if proot-distro login "$distro_name"; then
+         green "✅ $distro_name 系统已退出，返回菜单..."
+     else
+         red "❌ 启动失败，你可能未安装该系统或输入错误！"
+     fi
+     echo
+     green "按回车键返回菜单..."
+     read -r
+     clear
+}
+
+main_menu() {
+    while true; do
+        choice=$(whiptail --title "📱 Termux Proot-Distro 管理工具" --menu "请选择操作" 18 55 5 \
+        "1" "📋 列出所有proot容器" \
+        "2" "📦 安装proot容器" \
+        "3" "🗑️  卸载proot容器" \
+        "4" "🚀 启动proot容器" \
+        "5" "🚪 退出脚本" 3>&1 1>&2 2>&3)
+        
+        [ $? -ne 0 ] && { clear; green "脚本已退出！"; exit 0; }
+        
+        clear
+        case $choice in
+            1) list_proot_distro ;;
+            2) install_proot_distro ;;
+            3) uninstall_proot_distro ;;
+            4) start_proot_distro ;;
+            5) clear; green "脚本已退出！"; exit 0 ;;
+            *) red "无效选择，请重新选！"; sleep 1; clear ;;
+        esac
+    done
+}
+
+Proot_distro() {
+    check_proot_install
+    clear
+    main_menu
+}
