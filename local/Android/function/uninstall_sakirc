@@ -11,7 +11,7 @@ if ! command -v whiptail &> /dev/null; then
     pkg install whiptail -y &> /dev/null
 fi
 
-if whiptail --title "SakiRC 卸载（请确保已经删除完容器）" --yesno "是否确认卸载SakiRC？建议检查已安装的容器是否已清空，如果没有建议先返回手动操作，若有但继续操作且出现任何问题，开发者不承担任何责任" 8 50; then
+if whiptail --title "SakiRC 卸载（请确保已经删除完容器）" --yesno "是否确认卸载SakiRC？建议检查已安装的容器是否已清空，如果没有建议先返回手动操作，若无视该警告且继续操作出现任何问题，开发者不承担任何责任" 8 50; then
     echo -e "\n${GREEN}[+] 开始执行卸载操作...${RESET}"
 
     PATH1="${HOME}/.termux/共享文件夹"

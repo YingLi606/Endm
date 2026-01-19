@@ -110,7 +110,7 @@ ai_classification() {
     CHOICE=$(whiptail --clear --backtitle "DaLongZhuaZi" \
         --title "🤖 AI软件类" \
         --menu "请选择:" 15 60 4 \
-        1 "🙎🏻‍♀️ 豆包" \
+        1 "🐹 豆包" \
         2 "🌳 元宝" \
         3 "🔮 AutoGLM" \
         4 "🌚 退出" \
@@ -161,10 +161,10 @@ zerotermux_install() {
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
    
-    local DOWNLOAD_URL="https://gh.xmly.dev/https://github.com/hanxinhao000/ZeroTermux/releases/download/ZeroTermux-0.118.3.50/ZeroTermux-0.118.3.50-app-arm64-v8a-debug.apk"
-    local SAVE_PATH="SakiRC/app/ZeroTermux-0.118.3.50-app-arm64-v8a-debug.apk"
+    local DOWNLOAD_URL="https://d.icdown.club/repository/main/ZeroTermux/ZeroTermux-0.118.3.51.apk"
+    local SAVE_PATH="SakiRC/app/ZeroTermux-0.118.3.51.apk"
 
-    echo -e "\033[36m=== 开始多线程下载 ZeroTermux 安装包 ===\033[0m"
+    echo -e "\033[36m=== 开始下载 ZeroTermux 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
@@ -194,7 +194,7 @@ qq_install() {
     local DOWNLOAD_URL="https://downv6.qq.com/qqweb/QQ_1/android_apk/9.2.55_8ad932464eb5e30b.apk"
     local SAVE_PATH="SakiRC/app/9.2.55_8ad932464eb5e30b.apk"
 
-    echo -e "\033[36m=== 开始多线程下载 QQ 安装包 ===\033[0m"
+    echo -e "\033[36m=== 开始下载 QQ 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
@@ -224,7 +224,7 @@ wechat_install() {
     local DOWNLOAD_URL="https://d56416180f4bec475f131187642c8663b337d15b4be9849e.dlied1.cdntips.net/dldir1v6.qq.com/weixin/android/weixin8067android3000_0x28004333_arm64.apk"
     local SAVE_PATH="SakiRC/app/weixin8067android3000_0x28004333_arm64.apk"
 
-    echo -e "\033[36m=== 开始多线程下载 微信 安装包 ===\033[0m"
+    echo -e "\033[36m=== 开始下载 微信 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
@@ -254,7 +254,7 @@ tim_install() {
     local DOWNLOAD_URL="https://downv6.ydcdn.tcdnos.com/qqweb/QQ_1/android_apk/tim_4.1.0.4050.apk"
     local SAVE_PATH="SakiRC/app/tim_4.1.0.4050.apk"
 
-    echo -e "\033[36m=== 开始多线程下载 TIM 安装包 ===\033[0m"
+    echo -e "\033[36m=== 开始下载 TIM 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
@@ -284,7 +284,7 @@ doubao_install() {
     local DOWNLOAD_URL="https://lf9-apk.ugapk.cn/package/apk/nova_ai/22629_11040001/nova_ai_46006059a_v22629_11040001_6fb4_1765275161.apk"
     local SAVE_PATH="SakiRC/app/nova_ai_46006059a_v22629_11040001_6fb4_1765275161.apk"
 
-    echo -e "\033[36m=== 开始多线程下载 豆包 安装包 ===\033[0m"
+    echo -e "\033[36m=== 开始下载 豆包 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
@@ -314,7 +314,7 @@ hunyuan_install() {
     local DOWNLOAD_URL="https://cdn-hybrid-prod.hunyuan.tencent.com/Android/business/yuanbao-release-prod-signed-5040.apk"
     local SAVE_PATH="SakiRC/app/yuanbao-release-prod-signed-5040.apk"
 
-    echo -e "\033[36m=== 开始多线程下载 元宝 安装包 ===\033[0m"
+    echo -e "\033[36m=== 开始下载 元宝 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 
@@ -344,7 +344,7 @@ autoglm_install() {
     local DOWNLOAD_URL="https://autoglm.aminer.cn/web/deep_research/apk/autoglm.apk"
     local SAVE_PATH="SakiRC/app/autoglm.apk"
 
-    echo -e "\033[36m=== 开始多线程下载 AutoGLM 安装包 ===\033[0m"
+    echo -e "\033[36m=== 开始下载 AutoGLM 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 

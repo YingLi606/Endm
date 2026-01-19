@@ -74,7 +74,7 @@ start_proot_distro() {
 main_menu() {
     while true; do
         choice=$(whiptail --title "📱 Termux Proot-Distro 管理工具" --menu "请选择操作" 18 55 5 \
-        "1" "📋 列出所有proot容器" \
+        "1" "📋 列出所有Proot-Distro系统" \
         "2" "📦 安装proot容器" \
         "3" "🗑️  卸载proot容器" \
         "4" "🚀 启动proot容器" \
