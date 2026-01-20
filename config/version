@@ -1,5 +1,5 @@
 {
-    "version": "2.1.5-beta1",
+    "version": "2.1.5-beta2",
     "git_clone": "YingLi606/SakiRC",
-    "description": "Android功能: 1.修复系统容器昵称错误问题 2.优化并修复功能已知问题 新起点，再出发！"
+    "description": "Android功能: 1.新增Termux 小游戏专区 2.升级检测优化 3.部分界面优化处理 新起点，再出发！"
 }

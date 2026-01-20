@@ -1,0 +1,217 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+check_installed() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+install_with_progress() {
+    local package="$1"
+    local prompt="$2"
+    pkg install -y "$package" >/dev/null 2>&1 &
+    local pid=$!
+    (
+        local progress=0
+        while kill -0 $pid 2>/dev/null; do
+            echo $progress
+            echo "# $prompt（进度：$progress%）"
+            progress=$(( progress < 90 ? progress + 10 : progress ))
+            sleep 0.4
+        done
+        echo 100
+        echo "# $prompt 完成！"
+        sleep 0.2
+    ) | whiptail --title "🔧 安装中" --gauge "" 8 60 0
+}
+
+uninstall_with_progress() {
+    local package="$1"
+    local prompt="$2"
+    pkg uninstall -y "$package" >/dev/null 2>&1 &
+    local pid=$!
+    (
+        local progress=0
+        while kill -0 $pid 2>/dev/null; do
+            echo $progress
+            echo "# $prompt（进度：$progress%）"
+            progress=$(( progress < 90 ? progress + 10 : progress ))
+            sleep 0.4
+        done
+        echo 100
+        echo "# $prompt 完成！"
+        sleep 0.2
+    ) | whiptail --title "🗑️ 卸载中" --gauge "" 8 60 0
+}
+
+termux_games_sl_submenu() {
+    while true; do
+        SUB_RESULT=$(whiptail --title "🚂 sl（小火车）" \
+            --menu "选择操作" \
+            15 60 4 \
+            "1" "🚂 启动sl" \
+            "2" "🌈🚂 启动sl（彩色版）" \
+            "3" "🗑️ 卸载sl" \
+            "4" "🔙 返回上一级" \
+            3>&1 1>&2 2>&3)
+
+        if [ $? -ne 0 ]; then
+            break
+        fi
+
+        case $SUB_RESULT in
+            1)
+                if ! check_installed sl; then
+                    install_with_progress "sl" "正在安装sl（小火车）"
+                    if ! check_installed sl; then
+                        whiptail --msgbox "❌ sl安装失败，请检查网络！" 8 40
+                        continue
+                    fi
+                fi
+                clear
+                sl
+                read -p "按下回车键返回菜单..."
+                ;;
+            2)
+                if ! check_installed sl; then
+                    install_with_progress "sl" "正在安装sl（小火车）"
+                    if ! check_installed sl; then
+                        whiptail --msgbox "❌ sl安装失败，请检查网络！" 8 40
+                        continue
+                    fi
+                fi
+                if ! check_installed lolcat; then
+                    install_with_progress "lolcat" "正在安装lolcat（彩色核心）"
+                    if ! check_installed lolcat; then
+                        whiptail --msgbox "❌ lolcat安装失败，请检查网络！" 8 40
+                        continue
+                    fi
+                fi
+                clear
+                sl | lolcat
+                read -p "按下回车键返回菜单..."
+                ;;
+            3)
+                if check_installed sl; then
+                    uninstall_with_progress "sl" "正在卸载sl（小火车）"
+                    if check_installed sl; then
+                        whiptail --msgbox "❌ sl卸载失败！" 8 40
+                    else
+                        whiptail --msgbox "✅ sl卸载完成！" 8 40
+                    fi
+                else
+                    whiptail --msgbox "ℹ️ sl未安装，无需卸载！" 8 40
+                fi
+                ;;
+            4)
+                break
+                ;;
+        esac
+    done
+}
+
+termux_games_nsnake_submenu() {
+    while true; do
+        SUB_RESULT=$(whiptail --title "🐍 nsnake（贪吃蛇）" \
+            --menu "选择操作" \
+            15 60 4 \
+            "1" "🐍 启动nsnake" \
+            "2" "🌈🐍 启动nsnake（彩色版）" \
+            "3" "🗑️ 卸载nsnake" \
+            "4" "🔙 返回上一级" \
+            3>&1 1>&2 2>&3)
+
+        if [ $? -ne 0 ]; then
+            break
+        fi
+
+        case $SUB_RESULT in
+            1)
+                if ! check_installed nsnake; then
+                    install_with_progress "nsnake" "正在安装nsnake（贪吃蛇）"
+                    if ! check_installed nsnake; then
+                        whiptail --msgbox "❌ nsnake安装失败，请检查网络！" 8 40
+                        continue
+                    fi
+                fi
+                clear
+                nsnake
+                read -p "按下回车键返回菜单..."
+                ;;
+            2)
+                if ! check_installed nsnake; then
+                    install_with_progress "nsnake" "正在安装nsnake（贪吃蛇）"
+                    if ! check_installed nsnake; then
+                        whiptail --msgbox "❌ nsnake安装失败，请检查网络！" 8 40
+                        continue
+                    fi
+                fi
+                if ! check_installed lolcat; then
+                    install_with_progress "lolcat" "正在安装lolcat（彩色核心）"
+                    if ! check_installed lolcat; then
+                        whiptail --msgbox "❌ lolcat安装失败，请检查网络！" 8 40
+                        continue
+                    fi
+                fi
+                clear
+                nsnake | lolcat
+                read -p "按下回车键返回菜单..."
+                ;;
+            3)
+                if check_installed nsnake; then
+                    uninstall_with_progress "nsnake" "正在卸载nsnake（贪吃蛇）"
+                    if check_installed nsnake; then
+                        whiptail --msgbox "❌ nsnake卸载失败！" 8 40
+                    else
+                        whiptail --msgbox "✅ nsnake卸载完成！" 8 40
+                    fi
+                else
+                    whiptail --msgbox "ℹ️ nsnake未安装，无需卸载！" 8 40
+                fi
+                ;;
+            4)
+                break
+                ;;
+        esac
+    done
+}
+
+Termux_games() {
+    while true; do
+        MAIN_RESULT=$(whiptail --title "Termux 小游戏专区" \
+            --menu "让您解决无聊的烦恼" \
+            15 60 4 \
+            "1" "🌈 安装lolcat（彩色版核心）" \
+            "2" "🚂 sl（小火车）" \
+            "3" "🐍 nsnake（贪吃蛇）" \
+            "4" "🔙 返回" \
+            3>&1 1>&2 2>&3)
+
+        if [ $? -ne 0 ]; then
+            break
+        fi
+
+        case $MAIN_RESULT in
+            1)
+                if check_installed lolcat; then
+                    whiptail --msgbox "✅ lolcat已安装，无需重复操作！" 8 40
+                else
+                    install_with_progress "lolcat" "正在安装lolcat（彩色核心）"
+                    if check_installed lolcat; then
+                        whiptail --msgbox "✅ lolcat安装完成！" 8 40
+                    else
+                        whiptail --msgbox "❌ lolcat安装失败，请检查网络！" 8 40
+                    fi
+                fi
+                ;;
+            2)
+                termux_games_sl_submenu
+                ;;
+            3)
+                termux_games_nsnake_submenu
+                ;;
+            4)
+                break
+                ;;
+        esac
+    done
+}
+
