@@ -5,9 +5,9 @@ check_installed() {
 }
 
 install_with_progress() {
-    local package="$1"
+    local cmd="$1"
     local prompt="$2"
-    pkg install -y "$package" >/dev/null 2>&1 &
+    $cmd >/dev/null 2>&1 &
     local pid=$!
     (
         local progress=0
@@ -20,7 +20,7 @@ install_with_progress() {
         echo 100
         echo "# $prompt 完成！"
         sleep 0.2
-    ) | whiptail --title "🔧 安装中" --gauge "" 8 60 0
+    ) | whiptail --title "🔧 安装中" --gauge "这可能需要等待一段时间，取决于你的网络关系..." 10 60 0
 }
 
 uninstall_with_progress() {
@@ -39,7 +39,7 @@ uninstall_with_progress() {
         echo 100
         echo "# $prompt 完成！"
         sleep 0.2
-    ) | whiptail --title "🗑️ 卸载中" --gauge "" 8 60 0
+    ) | whiptail --title "🗑️ 卸载中" --gauge "请耐心等候..." 10 60 0
 }
 
 termux_games_sl_submenu() {
@@ -60,7 +60,7 @@ termux_games_sl_submenu() {
         case $SUB_RESULT in
             1)
                 if ! check_installed sl; then
-                    install_with_progress "sl" "正在安装sl（小火车）"
+                    install_with_progress "pkg install -y sl"
                     if ! check_installed sl; then
                         whiptail --msgbox "❌ sl安装失败，请检查网络！" 8 40
                         continue
@@ -68,18 +68,25 @@ termux_games_sl_submenu() {
                 fi
                 clear
                 sl
-                read -p "按下回车键返回菜单..."
+                clear
                 ;;
             2)
                 if ! check_installed sl; then
-                    install_with_progress "sl" "正在安装sl（小火车）"
+                    install_with_progress "pkg install -y sl"
                     if ! check_installed sl; then
                         whiptail --msgbox "❌ sl安装失败，请检查网络！" 8 40
                         continue
                     fi
                 fi
                 if ! check_installed lolcat; then
-                    install_with_progress "lolcat" "正在安装lolcat（彩色核心）"
+                    if ! check_installed ruby; then
+                        install_with_progress "apt-get install -y ruby"
+                        if ! check_installed ruby; then
+                            whiptail --msgbox "❌ ruby安装失败，请检查网络！" 8 40
+                            continue
+                        fi
+                    fi
+                    install_with_progress "gem install lolcat"
                     if ! check_installed lolcat; then
                         whiptail --msgbox "❌ lolcat安装失败，请检查网络！" 8 40
                         continue
@@ -87,11 +94,11 @@ termux_games_sl_submenu() {
                 fi
                 clear
                 sl | lolcat
-                read -p "按下回车键返回菜单..."
+                clear
                 ;;
             3)
                 if check_installed sl; then
-                    uninstall_with_progress "sl" "正在卸载sl（小火车）"
+                    uninstall_with_progress "sl"
                     if check_installed sl; then
                         whiptail --msgbox "❌ sl卸载失败！" 8 40
                     else
@@ -126,7 +133,7 @@ termux_games_nsnake_submenu() {
         case $SUB_RESULT in
             1)
                 if ! check_installed nsnake; then
-                    install_with_progress "nsnake" "正在安装nsnake（贪吃蛇）"
+                    install_with_progress "pkg install -y nsnake"
                     if ! check_installed nsnake; then
                         whiptail --msgbox "❌ nsnake安装失败，请检查网络！" 8 40
                         continue
@@ -134,18 +141,25 @@ termux_games_nsnake_submenu() {
                 fi
                 clear
                 nsnake
-                read -p "按下回车键返回菜单..."
+                clear
                 ;;
             2)
                 if ! check_installed nsnake; then
-                    install_with_progress "nsnake" "正在安装nsnake（贪吃蛇）"
+                    install_with_progress "pkg install -y nsnake"
                     if ! check_installed nsnake; then
                         whiptail --msgbox "❌ nsnake安装失败，请检查网络！" 8 40
                         continue
                     fi
                 fi
                 if ! check_installed lolcat; then
-                    install_with_progress "lolcat" "正在安装lolcat（彩色核心）"
+                    if ! check_installed ruby; then
+                        install_with_progress "apt-get install -y ruby"
+                        if ! check_installed ruby; then
+                            whiptail --msgbox "❌ ruby安装失败，请检查网络！" 8 40
+                            continue
+                        fi
+                    fi
+                    install_with_progress "gem install lolcat"
                     if ! check_installed lolcat; then
                         whiptail --msgbox "❌ lolcat安装失败，请检查网络！" 8 40
                         continue
@@ -153,11 +167,11 @@ termux_games_nsnake_submenu() {
                 fi
                 clear
                 nsnake | lolcat
-                read -p "按下回车键返回菜单..."
+                clear
                 ;;
             3)
                 if check_installed nsnake; then
-                    uninstall_with_progress "nsnake" "正在卸载nsnake（贪吃蛇）"
+                    uninstall_with_progress "nsnake"
                     if check_installed nsnake; then
                         whiptail --msgbox "❌ nsnake卸载失败！" 8 40
                     else
@@ -176,13 +190,13 @@ termux_games_nsnake_submenu() {
 
 Termux_games() {
     while true; do
-        MAIN_RESULT=$(whiptail --title "Termux 小游戏专区" \
+        MAIN_RESULT=$(whiptail --title "🎮 Termux 小游戏专区" \
             --menu "让您解决无聊的烦恼" \
             15 60 4 \
             "1" "🌈 安装lolcat（彩色版核心）" \
             "2" "🚂 sl（小火车）" \
             "3" "🐍 nsnake（贪吃蛇）" \
-            "4" "🔙 返回" \
+            "4" "🌚 退出" \
             3>&1 1>&2 2>&3)
 
         if [ $? -ne 0 ]; then
@@ -194,7 +208,14 @@ Termux_games() {
                 if check_installed lolcat; then
                     whiptail --msgbox "✅ lolcat已安装，无需重复操作！" 8 40
                 else
-                    install_with_progress "lolcat" "正在安装lolcat（彩色核心）"
+                    if ! check_installed ruby; then
+                        install_with_progress "apt-get install -y ruby"
+                        if ! check_installed ruby; then
+                            whiptail --msgbox "❌ ruby安装失败，请检查网络！" 8 40
+                            continue
+                        fi
+                    fi
+                    install_with_progress "gem install lolcat"
                     if check_installed lolcat; then
                         whiptail --msgbox "✅ lolcat安装完成！" 8 40
                     else
@@ -214,4 +235,3 @@ Termux_games() {
         esac
     done
 }
-
