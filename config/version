@@ -1,5 +1,5 @@
 {
-    "version": "2.1.5",
+    "version": "2.1.5-beta1",
     "git_clone": "YingLi606/SakiRC",
-    "description": "Android功能: 1.软件商店部分应用更换下载链接 2.优化并修复已知问题 新起点，再出发！"
+    "description": "Android功能: 1.修复系统容器昵称错误问题 2.优化并修复功能已知问题 新起点，再出发！"
 }
