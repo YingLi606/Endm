@@ -6,7 +6,7 @@ open_debian_os_list() {
 	sleep 0.1
 	echo -e "\e[92m1. 🟢 Trixie（Debian 13）\e[0m"
 	sleep 0.1
-	echo -e "\e[92m2. ⚪️ Forky（Debian 14）\e[0m"	
+	echo -e "\e[96m4. ⚪️ Forky（Debian 14）\e[0m"	
 	sleep 0.1
 	echo -e "\e[93m3. 🟡 Bookworm（Debian 12）\e[0m"
 	sleep 0.1

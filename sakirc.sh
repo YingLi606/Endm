@@ -322,7 +322,8 @@ case ${1} in
 		self_install whiptail  
 		self_install tmux 
 		self_install bc
-		self_install aria2 
+		self_install aria2
+		self_install uv 
 		validity
 		variable
 		bash ${HOME}/SakiRC/function/update.sh

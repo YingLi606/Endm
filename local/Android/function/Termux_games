@@ -35,28 +35,25 @@ uninstall_with_progress() {
     local cmd="$1"
     local package="$2"
     local prompt="$3"
+    $cmd >/dev/null 2>&1 &
+    local pid=$!
     (
         local progress=0
-        while [ $progress -lt 100 ]; do
+        while kill -0 $pid 2>/dev/null; do
             echo $progress
             echo "# $prompt（进度：$progress%）"
-            progress=$(( progress + 10 ))
-            sleep 0.3
+            progress=$(( progress < 90 ? progress + 10 : progress ))
+            sleep 0.4
         done
         echo 100
         echo "# $prompt 完成！"
-    ) | whiptail --title "卸载中" --gauge "请耐心等候..." 10 60 0 &
-    local gauge_pid=$!
-    $cmd >/dev/null 2>&1
-    local uninstall_exit_code=$?
-    wait $gauge_pid 2>/dev/null
+        sleep 0.2
+    ) | whiptail --title "🗑️ 卸载中" --gauge "请耐心等候..." 10 60 0
     sleep 1
-    if [ $uninstall_exit_code -ne 0 ] || check_installed "$package"; then
+    if check_installed "$package"; then
         whiptail --msgbox "❌ $package 卸载失败！" 8 40
         return 1
     fi
-    whiptail --msgbox "✅ $package 卸载完成！" 8 40
-    clear
     return 0
 }
 
@@ -76,37 +73,43 @@ termux_games_sl_submenu() {
         case $SUB_RESULT in
             1)
                 if ! check_installed "sl"; then
-                    install_with_progress "pkg install -y sl" "sl" "正在安装sl（小火车）"
+                    whiptail --msgbox "sl未安装，将自动安装..." 8 40
+                    if ! install_with_progress "pkg install -y sl" "sl" "正在安装sl（小火车）"; then
+                        continue
+                    fi
                 fi
-                if check_installed "sl"; then
-                    clear
-                    sl
-                    clear
-                else
-                    whiptail --msgbox "❌ sl未安装成功，无法启动！" 8 40
-                fi
+                clear
+                sl
+                clear
                 ;;
             2)
                 if ! check_installed "sl"; then
-                    install_with_progress "pkg install -y sl" "sl" "正在安装sl（小火车）"
+                    whiptail --msgbox "sl未安装，将自动安装..." 8 40
+                    if ! install_with_progress "pkg install -y sl" "sl" "正在安装sl（小火车）"; then
+                        continue
+                    fi
                 fi
                 if ! check_installed "lolcat"; then
                     if ! check_installed "ruby"; then
-                        install_with_progress "apt install -y ruby" "ruby" "正在安装ruby（依赖）"
+                        whiptail --msgbox "ruby未安装（lolcat依赖），将自动安装..." 8 40
+                        if ! install_with_progress "apt-get install -y ruby" "ruby" "正在安装ruby（依赖）"; then
+                            continue
+                        fi
                     fi
-                    install_with_progress "gem install lolcat" "lolcat" "正在安装lolcat（彩色核心）"
+                    whiptail --msgbox "lolcat未安装，将自动安装..." 8 40
+                    if ! install_with_progress "gem install lolcat" "lolcat" "正在安装lolcat（彩色核心）"; then
+                        continue
+                    fi
                 fi
-                if check_installed "sl" && check_installed "lolcat"; then
-                    clear
-                    sl | lolcat
-                    clear
-                else
-                    whiptail --msgbox "❌ sl或lolcat未安装成功，无法启动彩色版！" 8 40
-                fi
+                clear
+                sl | lolcat
+                clear
                 ;;
             3)
                 if check_installed "sl"; then
-                    uninstall_with_progress "apt remove -y sl" "sl" "正在卸载sl（小火车）"
+                    if uninstall_with_progress "pkg remove -y sl" "sl" "正在卸载sl（小火车）"; then
+                        whiptail --msgbox "✅ sl卸载完成！" 8 40
+                    fi
                 else
                     whiptail --msgbox "sl未安装，无需卸载！" 8 40
                 fi

@@ -1,5 +1,5 @@
 {
-    "version": "2.1.5-beta4",
+    "version": "2.2.0",
     "git_clone": "YingLi606/SakiRC",
     "description": "Android功能: 1.新增Termux 小游戏专区 2.升级检测优化 3.部分界面优化处理 新起点，再出发！"
 }
