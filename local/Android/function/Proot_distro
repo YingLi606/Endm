@@ -46,7 +46,7 @@ uninstall_proot_distro() {
         green "✅ 系统 $distro_name 卸载成功！"
         green "正在清空Proot-distro已安装的系统容器缓存..."
         proot-distro clear-cache
-        green "✅ 缓存已清空！"
+        green "✅ 容器缓存已清空！"
     else
         red "❌ 输入错误，该系统不存在或卸载失败！"
     fi

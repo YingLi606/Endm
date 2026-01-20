@@ -42,13 +42,13 @@ shell_classification() {
     CHOICE=$(whiptail --clear --backtitle "DaLongZhuaZi" \
         --title "🖥 编程及终端代码类" \
         --menu "请选择:" 15 60 4 \
-        1 "💻 ZeroTermux-0.118.3.49" \
+        1 "💻 ZeroTermux-0.118.3.51" \
         2 "🌚 退出" \
     3>&1 1>&2 2>&3)
     
     case $CHOICE in
         1)
-            log "ZeroTermux-0.118.3.49"
+            log "ZeroTermux-0.118.3.51"
             clear
             zerotermux_install
         ;;
