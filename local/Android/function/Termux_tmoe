@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 Termux_tmoe(){
 clear
-if (whiptail --title "切换至TMOE" --yesno "由于Moe作者已停止维护，可能会出现不可预估错误；切换成功后将不可返回该脚本，你确定要切换TMOE吗？" 12 60); then
+if (whiptail --title "切换至TMOE" --yesno "由于Moe作者已停止维护，可能会出现不可预估错误；切换成功后将不可返回该脚本，你确定要继续切换TMOE吗？" 12 60); then
     clear
     echo -e "\033[1;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
     echo -e "\033[1;36m ✅ 正在切换至 TMOE 环境 \033[0m"

@@ -29,7 +29,7 @@ install_MC_SERVER() {
 	log "准备安装MC_SERVER"
 	while true; do
 		if [ $(tput cols) -lt 55 ]; then
-			echo "双指捏合屏幕缩小屏幕"
+			echo "请双指捏合屏幕缩小屏幕"
 			echo "当前只有$(tput cols)列"
 		else
 			break
@@ -251,7 +251,7 @@ rm_MC_SERVER() {
 			rm -rfv "${HOME}/.termux/SakiRC/MCserver/${rm_MC_SERVER_class}/${list_items[$((user_choice - 1))]}"
 			log "删除完成"
 		else
-			echo -e "\e[91m❌ 错误！你输入的答案不正确。删除程序将不执行。\e[0m"
+			echo -e "\e[91m❌ 错误！你输入的答案不正确\e[0m"
 			sleep 2
 			log "取消失败"
 		fi

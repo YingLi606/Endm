@@ -113,7 +113,8 @@ ai_classification() {
         1 "🐹 豆包" \
         2 "🌳 元宝" \
         3 "🔮 AutoGLM" \
-        4 "🌚 退出" \
+        4 "⚗️ 千问" \
+        5 "🌚 退出" \
     3>&1 1>&2 2>&3)
     
     case $CHOICE in
@@ -133,6 +134,11 @@ ai_classification() {
             autoglm_install
         ;;
         4)
+            log "千问"
+            clear
+            qwen_install
+        ;;        
+        5)
             log "退出"
             clear
             echo "退出"
@@ -161,8 +167,8 @@ zerotermux_install() {
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
    
-    local DOWNLOAD_URL="https://d.icdown.club/repository/main/ZeroTermux/ZeroTermux-0.118.3.51.apk"
-    local SAVE_PATH="SakiRC/app/ZeroTermux-0.118.3.51.apk"
+    local DOWNLOAD_URL="https://gh.xmly.dev/https://github.com/hanxinhao000/ZeroTermux/releases/download/ZeroTermux-0.118.3.53/ZeroTermux-0.118.53-release_arm64-v8a.apk"
+    local SAVE_PATH="SakiRC/app/ZeroTermux-0.118.53-release_arm64-v8a.apk"
 
     echo -e "\033[36m=== 开始下载 ZeroTermux 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
@@ -191,8 +197,8 @@ qq_install() {
         echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
     fi
     
-    local DOWNLOAD_URL="https://downv6.qq.com/qqweb/QQ_1/android_apk/9.2.55_8ad932464eb5e30b.apk"
-    local SAVE_PATH="SakiRC/app/9.2.55_8ad932464eb5e30b.apk"
+    local DOWNLOAD_URL="https://downv6.ydcdn.tcdnos.com/qqweb/QQ_1/android_apk/9.2.60_2d027de571d58f90.apk"
+    local SAVE_PATH="SakiRC/app/9.2.60_2d027de571d58f90.apk"
 
     echo -e "\033[36m=== 开始下载 QQ 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
@@ -345,6 +351,36 @@ autoglm_install() {
     local SAVE_PATH="SakiRC/app/autoglm.apk"
 
     echo -e "\033[36m=== 开始下载 AutoGLM 安装包 ===\033[0m"
+    echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
+    aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
+
+    if [ $? -eq 0 ]; then
+        echo -e "\033[32m✅ 下载成功！在 $HOME/SakiRC/app 目录里找到即可\033[0m"
+        sleep 3
+    else
+        echo -e "\033[31m❌ 下载失败！5秒后退出...\033[0m"
+        sleep 5
+        clear
+        exit 1
+    fi
+}
+
+qwen_install() {
+    if ! command -v aria2c &> /dev/null; then
+        echo -e "\033[34m检测到未安装aria2c，正在自动安装...\033[0m"
+        pkg install -y aria2 > /dev/null 2>&1
+    fi
+
+    local APP_DIR="$HOME/SakiRC/app"
+    if [ ! -d "$APP_DIR" ]; then
+        mkdir -p "$APP_DIR"
+        echo -e "\033[34m检测到app文件夹不存在，已自动创建：$APP_DIR\033[0m"
+    fi
+    
+    local DOWNLOAD_URL="https://appdownload.alicdn.com/publish/tongyi_android/latest/tongyi_android_36396434394984.apk"
+    local SAVE_PATH="SakiRC/app/tongyi_android_36396434394984.apk"
+
+    echo -e "\033[36m=== 开始下载 千问 安装包 ===\033[0m"
     echo -e "\033[36m保存路径：$SAVE_PATH\033[0m"
     aria2c --max-connection-per-server=8 "$DOWNLOAD_URL" -o "$SAVE_PATH"
 

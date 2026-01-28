@@ -18,30 +18,75 @@ installNapCatQQ() {
         read -p ""
     }
 
+    check_supported_system() {
+        local os_name=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
+        local os_version=$(grep -oP '(?<=^VERSION_ID=).+' /etc/os-release | tr -d '"')
+        
+        case "$os_name" in
+            ubuntu)
+                [ $(echo "$os_version >= 20.04" | bc) -eq 1 ] && return 0 || return 1
+                ;;
+            debian)
+                [ $(echo "$os_version >= 10" | bc) -eq 1 ] && return 0 || return 1
+                ;;
+            centos)
+                [ "$os_version" = "9" ] && return 0 || return 1
+                ;;
+            *)
+                return 1
+                ;;
+        esac
+    }
+
     if [ "${system_os_type}" = proot ]; then
         show_warning_and_confirm
         log "系统为proot容器"
-        log "安装NapCatQQ"
-        if [ "${system_os_type2}" = Bookworm_Debian_12 ]; then
-            log "容器为Bookworm_Debian_12下载并安装官方脚本"
+        if check_supported_system; then
+            log "安装NapCatQQ（支持的系统版本）"
             curl -o napcat.sh https://nclatest.znin.net/NapNeko/NapCat-Installer/main/script/install.sh && sudo bash napcat.sh
         else
-            echo -e "${WORRY}容器状态该功能只支持Debian Bookworm版本安装！"
+            echo -e "${WORRY}容器系统版本不支持！仅支持Ubuntu 20+/Debian 10+/CentOS 9"
             clear
-            log "容器非目前该功能只支持Debian 12"
+            log "容器系统版本不支持，仅支持Ubuntu 20+/Debian 10+/CentOS 9"
         fi
     else
         show_warning_and_confirm
         log "系统为非proot容器"
-        curl -o napcat.sh https://nclatest.znin.net/NapNeko/NapCat-Installer/main/script/install.sh && sudo bash napcat.sh
+        if check_supported_system; then
+            log "安装NapCatQQ（支持的系统版本）"
+            curl -o napcat.sh https://nclatest.znin.net/NapNeko/NapCat-Installer/main/script/install.sh && sudo bash napcat.sh
+        else
+            echo -e "${WORRY}系统版本不支持！仅支持Ubuntu 20及以上/Debian 10及以上/CentOS 9"
+            clear
+            log "系统版本不支持，仅支持Ubuntu 20+/Debian 10+/CentOS 9"
+        fi
     fi
 }
 
 startNapCatQQ() {
+    check_supported_system() {
+        local os_name=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
+        local os_version=$(grep -oP '(?<=^VERSION_ID=).+' /etc/os-release | tr -d '"')
+        
+        case "$os_name" in
+            ubuntu)
+                [ $(echo "$os_version >= 20.04" | bc) -eq 1 ] && return 0 || return 1
+                ;;
+            debian)
+                [ $(echo "$os_version >= 10" | bc) -eq 1 ] && return 0 || return 1
+                ;;
+            centos)
+                [ "$os_version" = "9" ] && return 0 || return 1
+                ;;
+            *)
+                return 1
+                ;;
+        esac
+    }
+
     if [ "${system_os_type}" = "proot" ]; then
         log "系统为proot容器"
-        log "启动NapCatQQ"
-        if [ "${system_os_type2}" = "Bookworm_Debian_12" ]; then
+        if check_supported_system; then
             log "启动NapCatQQ"
             if [ "${QQbot}" = "" ]; then
                 read -e -p "请输入您的QQ号（建议用小号）：" QQbot
@@ -59,11 +104,31 @@ startNapCatQQ() {
                 ;;
             esac
         else
-            echo -e "${WORRY}该功能目前只支持Debian 12 Bookworm"
-            log "容器非目前该功能只支持Debian 12"
+            echo -e "${WORRY}容器系统版本不支持！仅支持Ubuntu 20及以上/Debian 10及以上/CentOS 9"
+            log "容器系统版本不支持，仅支持Ubuntu 20+/Debian 10+/CentOS 9"
         fi
     else
         log "系统为非proot容器"
-        curl -o napcat.sh https://nclatest.znin.net/NapNeko/NapCat-Installer/main/script/install.sh && sudo bash napcat.sh
+        if check_supported_system; then
+            log "启动NapCatQQ"
+            if [ "${QQbot}" = "" ]; then
+                read -e -p "请输入您的QQ号（建议用小号）：" QQbot
+                log "QQbot为空"
+                Modify_the_variable QQbot "${QQbot}" "${HOME}/SakiRC/config/config.sh"
+            fi
+            case "${1}" in
+            --Background | -B)
+                log "后台启动NapCatQQ"
+                screen -dmS napcat bash -c "xvfb-run -a ${HOME}/Napcat/opt/QQ/qq --no-sandbox -q ${QQbot}"
+                ;;
+            *)
+                log "启动NapCatQQ"
+                xvfb-run -a ${HOME}/Napcat/opt/QQ/qq --no-sandbox "${QQbot}"
+                ;;
+            esac
+        else
+            echo -e "${WORRY}系统版本不支持！仅支持Ubuntu 20及以上/Debian 10及以上/CentOS 9"
+            log "系统版本不支持，仅支持Ubuntu 20+/Debian 10+/CentOS 9"
+        fi
     fi
 }

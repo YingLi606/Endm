@@ -45,7 +45,7 @@ if whiptail --title "SakiRC 卸载（请确保已经删除完容器）" --yesno 
     echo -e "\n${GREEN}[√] 卸载操作全部完成！感谢你使用SakiRC！${RESET}"
 else
     echo -e "\n${RED}[-] 用户取消卸载操作，程序即将退出...${RESET}"
-    sleep 3
+    sleep 4
     clear
     exit 0
 fi
