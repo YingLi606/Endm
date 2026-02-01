@@ -66,34 +66,34 @@ install_core() {
         1)
             CORE_TYPE="Paper"
             VER=$(whiptail --title "选Paper版本" --menu "选择版本" 12 40 2 \
-                "1" "1.21.10" "2" "1.21.8" \
+                "1" "1.21.11" "2" "1.21.10" \
                 3>&1 1>&2 2>&3)
             [ -z "$VER" ] && return
-            VERSION=$([ $VER -eq 1 ] && echo "1.21.10" || echo "1.21.8")
+            VERSION=$([ $VER -eq 1 ] && echo "1.21.11" || echo "1.21.10")
             INSTALL_DIR="$BASE_DIR/$CORE_TYPE/$VERSION"  
             CORE_JAR="paper.jar"
             mkdir -p "$INSTALL_DIR/plugins" && cd "$INSTALL_DIR"
             clear
             echo -e "${INFO} 开始下载Paper $VERSION 核心...${RES}"
-            if [ "$VERSION" = "1.21.10" ]; then
-                wget --show-progress "https://fill-data.papermc.io/v1/objects/23f6560d17e285149c0e486579e3fcc8208dcc171a59c4d021057a9063534732/paper-1.21.10-64.jar" -O "$CORE_JAR"
+            if [ "$VERSION" = "1.21.11" ]; then
+                wget --show-progress "https://fill-data.papermc.io/v1/objects/4a558a00005d33dafa4c4d5f9e47b3bd47d92311fceccd9c9754ee6b913f8649/paper-1.21.11-100.jar" -O "$CORE_JAR"
             else
-                wget --show-progress "https://fill-data.papermc.io/v1/objects/8de7c52c3b02403503d16fac58003f1efef7dd7a0256786843927fa92ee57f1e/paper-1.21.8-60.jar" -O "$CORE_JAR"
+                wget --show-progress "https://fill-data.papermc.io/v1/objects/158703f75a26f842ea656b3dc6d75bf3d1ec176b97a2c36384d0b80b3871af53/paper-1.21.10-130.jar" -O "$CORE_JAR"
             fi
             ;;
         2)
             CORE_TYPE="Spigot"
             VER=$(whiptail --title "选Spigot版本" --menu "选择版本" 10 40 1 \
-                "1" "1.21.8" \
+                "1" "1.21.11" \
                 3>&1 1>&2 2>&3)
             [ -z "$VER" ] && return
-            VERSION="1.21.8"
+            VERSION="1.21.11"
             INSTALL_DIR="$BASE_DIR/$CORE_TYPE/$VERSION"  
             CORE_JAR="spigot.jar"
             mkdir -p "$INSTALL_DIR/plugins" && cd "$INSTALL_DIR"
             clear
             echo -e "${INFO} 开始下载Spigot $VERSION 核心...${RES}"
-            wget --show-progress "https://cdn.getbukkit.org/spigot/spigot-1.21.8.jar" -O "$CORE_JAR"
+            wget --show-progress "https://files.mslmc.cn/d/Server-Cores/Spigot/spigot-1.21.11.jar" -O "$CORE_JAR"
             ;;
         3)
             CORE_TYPE="Nukkit"
@@ -111,28 +111,28 @@ install_core() {
         4)
             CORE_TYPE="Fabric"
             VER=$(whiptail --title "选Fabric版本" --menu "选择版本" 12 40 2 \
-                "1" "1.21.10" "2" "1.21.9" \
+                "1" "1.21.11" "2" "1.21.10" \
                 3>&1 1>&2 2>&3)
             [ -z "$VER" ] && return
             VERSION=$([ $VER -eq 1 ] && echo "1.21.10" || echo "1.21.9")
             INSTALL_DIR="$BASE_DIR/$CORE_TYPE/$VERSION"  
             mkdir -p "$INSTALL_DIR/plugins" && cd "$INSTALL_DIR"
             echo -e "${INFO} 开始下载Fabric $VERSION 核心...${RES}"
-            # 关键1：删除-o参数，保留原始文件名（格式：fabric-server-mc.版本号-loader.0.17.3-launcher.1.1.0.jar）
+
             if [ "$VERSION" = "1.21.10" ]; then
-                sudo curl -OJ "https://meta.fabricmc.net/v2/versions/loader/1.21.10/0.17.3/1.1.0/server/jar"
+                sudo curl -OJ "https://file.mslmc.cn/mirrors/fabric/1.21.11/0.18.4/1.0.0/server/jar"
             else
-                sudo curl -OJ "https://meta.fabricmc.net/v2/versions/loader/1.21.9/0.17.3/1.1.0/server/jar"
+                sudo curl -OJ "https://file.mslmc.cn/mirrors/fabric/1.21.10/0.18.4/1.0.0/server/jar"
             fi
-            # 关键2：读取符合格式的Fabric jar文件名，避免硬编码
+
             CORE_JAR=$(ls "fabric-server-mc.$VERSION-loader.0.17.3-launcher.1.1.0.jar" 2>/dev/null)
             [ -z "$CORE_JAR" ] && { echo -e "${ERROR} Fabric核心文件未找到，下载失败！${RES}"; return; }
             
             echo -e "${INFO} 开始下载Fabric API $VERSION...${RES}"
             if [ "$VERSION" = "1.21.10" ]; then
-                wget --show-progress "https://cdn.modrinth.com/data/P7dR8mSH/versions/qNm2IWMn/fabric-api-0.135.0%2B1.21.10.jar" -O plugins/fabric-api.jar
+                wget --show-progress "https://cdn-alt.modrinth.com/data/P7dR8mSH/versions/L34yYPTD/fabric-api-0.141.2%2B1.21.11.jar" -O plugins/fabric-api.jar
             else
-                wget --show-progress "https://cdn.modrinth.com/data/P7dR8mSH/versions/iHrvVvaM/fabric-api-0.134.0%2B1.21.9.jar" -O plugins/fabric-api.jar
+                wget --show-progress "https://cdn-alt.modrinth.com/data/P7dR8mSH/versions/tV4Gc0Zo/fabric-api-0.138.4%2B1.21.10.jar" -O plugins/fabric-api.jar
             fi
             ;;
     esac
