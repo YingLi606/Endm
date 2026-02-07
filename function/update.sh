@@ -60,7 +60,7 @@ if [ "$(printf '%s\n' "$REMOTE_VERSION" "$LOCAL_VERSION" | sort -V | tail -n1)" 
 	echo -e "${LIGHT_BLUE}📌 版本检测结果${RES}"
 	echo -e "${BLUE}=========================================${RES}"
 	echo -e "${YELLOW}本地版本:${RES} ${LIGHT_GREEN}$LOCAL_VERSION${RES}"
-	echo -e "${YELLOW}云端版本:${RES} ${GREEN}$REMOTE_VERSION${RES} (最新)"
+	echo -e "${YELLOW}云端版本:${RES} ${GREEN}$REMOTE_VERSION${RES} (✨ 最新)"
 	echo -e "${YELLOW}更新公告:${RES} ${LIGHT_BLUE}$DESCRIPTION${RES}"
 	echo -e "${BLUE}=========================================${RES}\n"
 	
@@ -130,7 +130,7 @@ if [ "$(printf '%s\n' "$REMOTE_VERSION" "$LOCAL_VERSION" | sort -V | tail -n1)" 
 	echo -e "${LIGHT_GREEN}🎉 更新完成！${RES}"
 	echo -e "${YELLOW}提示：每次更新重启脚本后，需先退出脚本再重新执行并选择更新地址${RES}"
 	echo -e "\n${GREEN}=========================================${RES}"
-	echo -e -n "${INFO}🚀 脚本将在 ${RED}5${RES} 秒后重新启动... "
+	echo -e -n "${INFO}🚀 脚本即将重启... "
 	for i in 4 3 2 1; do
 	    sleep 1
 	    echo -e -n "\b\b${RED}$i${RES} "
