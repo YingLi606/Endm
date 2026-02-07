@@ -32,11 +32,11 @@ declare -A arch_map=(["aarch64"]="arm64" ["armv7l"]="armhf" ["x86_64"]="amd64")
 archurl="${arch_map[$(uname -m)]}"
 
 variable() {
-	source ${HOME}/SakiRC/config/config.sh
+	source ${HOME}/Endm/config/config.sh
 }
 
 log() {
-	local fileName="${HOME}/SakiRC/log.log"
+	local fileName="${HOME}/Endm/log.log"
 	local fileMaxLen=100
 	local fileDeleteLen=10
 	if test $fileName; then
@@ -74,7 +74,7 @@ hcjx() {
 }
 
 validity_git() {
-	source ${HOME}/SakiRC/config/config.sh
+	source ${HOME}/Endm/config/config.sh
 	if [ "${git}" = "" ]; then
 		wheregit=$(
 			whiptail --title "选择默认更新源" --menu "以后的每次安装会优先考虑默认更新源" 15 60 4 \
@@ -84,18 +84,18 @@ validity_git() {
 		)
 		case ${wheregit} in
 		1)
-			Modify_the_variable git "https:\/\/github.com\/" ${HOME}/SakiRC/config/config.sh
-			Modify_the_variable rawgit "https:\/\/raw.githubusercontent.com\/YingLi606\/SakiRC\/refs\/heads\/main\/" ${HOME}/SakiRC/config/config.sh
+			Modify_the_variable git "https:\/\/github.com\/" ${HOME}/Endm/config/config.sh
+			Modify_the_variable rawgit "https:\/\/raw.githubusercontent.com\/YingLi606\/Endm\/refs\/heads\/main\/" ${HOME}/Endm/config/config.sh
 			return 0
 			;;
 		2)
-			Modify_the_variable git "https:\/\/gh.xmly.dev\/https:\/\/github.com\/" ${HOME}/SakiRC/config/config.sh
-			Modify_the_variable rawgit "https:\/\/gh.xmly.dev\/https:\/\/raw.githubusercontent.com\/YingLi606\/SakiRC\/refs\/heads\/main\/" ${HOME}/SakiRC/config/config.sh
+			Modify_the_variable git "https:\/\/gh.xmly.dev\/https:\/\/github.com\/" ${HOME}/Endm/config/config.sh
+			Modify_the_variable rawgit "https:\/\/gh.xmly.dev\/https:\/\/raw.githubusercontent.com\/YingLi606\/Endm\/refs\/heads\/main\/" ${HOME}/Endm/config/config.sh
 			return 0
 			;;
 		*)
 			echo -e " 未选择默认修改为 ${YELLOW}Github${RES} "
-			Modify_the_variable rawgit "https:\/\/raw.githubusercontent.com\/YingLi606\/SakiRC\/refs\/heads\/main\/" ${HOME}/SakiRC/config/config.sh
+			Modify_the_variable rawgit "https:\/\/raw.githubusercontent.com\/YingLi606\/Endm\/refs\/heads\/main\/" ${HOME}/Endm/config/config.sh
 			return 0
 			;;
 		esac
@@ -103,7 +103,7 @@ validity_git() {
 }
 
 validity_auto_upgrade() {
-	source ${HOME}/SakiRC/config/config.sh
+	source ${HOME}/Endm/config/config.sh
 	if [ "${auto_upgrade}" = "" ]; then
 		wheregit=$(
 			whiptail --title "选择默认安装源" --menu "是否自动更新软件包(默认关闭,但建议开启)" 15 60 4 \
@@ -113,18 +113,18 @@ validity_auto_upgrade() {
 		)
 		case ${wheregit} in
 		1)
-			Modify_the_variable auto_upgrade "true" ${HOME}/SakiRC/config/config.sh
+			Modify_the_variable auto_upgrade "true" ${HOME}/Endm/config/config.sh
 			log "自动升级脚本开启"
 			return 0
 			;;
 		2)
-			Modify_the_variable auto_upgrade "false" ${HOME}/SakiRC/config/config.sh
+			Modify_the_variable auto_upgrade "false" ${HOME}/Endm/config/config.sh
 			log "自动升级脚本关闭"
 			return 0
 			;;
 		*)
 			echo -e " 未选择默认修改为 ${YELLOW}false${RES} "
-			Modify_the_variable auto_upgrade "false" ${HOME}/SakiRC/config/config.sh
+			Modify_the_variable auto_upgrade "false" ${HOME}/Endm/config/config.sh
 			log "自动升级脚本关闭"
 			return 0
 			;;
@@ -133,7 +133,7 @@ validity_auto_upgrade() {
 }
 
 validity_dir() {
-	mkdir -p ${HOME}/SakiRC/{download,config}
+	mkdir -p ${HOME}/Endm/{download,config}
 	mkdir -p ${HOME}/.back
 	mkdir -p ${HOME}/.TEMP
 }
@@ -161,13 +161,13 @@ list_dir() {
 }
 
 apt_up() {
-	source ${HOME}/SakiRC/config/config.sh
+	source ${HOME}/Endm/config/config.sh
 	current_timestamp=$(date +%s)
 	if [[ -z "${last_time_aptup}" || $((current_timestamp - last_time_aptup)) -ge $((5 * 24 * 60 * 60)) ]]; then
 		if [ "${auto_upgrade}" = "true" ]; then
 			log "自动升级脚本开启"
 			$package_manager update -y && $package_manager upgrade -y
-			Modify_the_variable last_time_aptup ${current_timestamp} ${HOME}/SakiRC/config/config.sh
+			Modify_the_variable last_time_aptup ${current_timestamp} ${HOME}/Endm/config/config.sh
 		else
 			log "自动升级脚本未开启"
 		fi
@@ -175,7 +175,7 @@ apt_up() {
 }
 
 debuger() {
-	echo "${INFO}脚本定义的变量：$(cat ${HOME}/SakiRC/config/config.sh)" 
+	echo "${INFO}脚本定义的变量：$(cat ${HOME}/Endm/config/config.sh)" 
 	case $(uname -o) in
 	Android)
 		echo -e "${INFO}当前运行环境为Android${RES}"
@@ -216,7 +216,7 @@ debuger() {
 	echo "已使用交换分区大小："$mem_swap_used  
 	mem_swap_free=`free | grep Swap | awk '{print $4}'`  
 	echo "剩余交换分区大小："$mem_swap_free  
-	tail -n 50 ${HOME}/SakiRC/log.log 
+	tail -n 50 ${HOME}/Endm/log.log 
 }
 
 get_linux_distro() {
@@ -302,11 +302,11 @@ case ${1} in
 	case $2 in
 	Android | A)
 		log "指定加载安卓功能"
-		source ${HOME}/SakiRC/local/Android/Android_menu $3 $4 $5
+		source ${HOME}/Endm/local/Android/Android_menu $3 $4 $5
 		;;
 	Linux | L)
 		log "指定加载Linux功能"
-		source ${HOME}/SakiRC/local/Linux/Linux_menu $3 $4 $5
+		source ${HOME}/Endm/local/Linux/Linux_menu $3 $4 $5
 		;;
 	esac
 	;;
@@ -326,9 +326,9 @@ case ${1} in
 		self_install uv 
 		validity
 		variable
-		bash ${HOME}/SakiRC/function/update.sh
+		bash ${HOME}/Endm/function/update.sh
 		log "检查更新"
-		source ${HOME}/SakiRC/local/Android/Android_menu $1 $2 $3
+		source ${HOME}/Endm/local/Android/Android_menu $1 $2 $3
 		sleep 2
 		clear
 		;;
@@ -342,9 +342,9 @@ case ${1} in
 		self_install bc
 		validity
 		variable
-		bash ${HOME}/SakiRC/function/update.sh
+		bash ${HOME}/Endm/function/update.sh
 		log "检查更新"
-		source ${HOME}/SakiRC/local/Linux/Linux_menu $1 $2 $3
+		source ${HOME}/Endm/local/Linux/Linux_menu $1 $2 $3
 		sleep 2
 		clear
 		;;

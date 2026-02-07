@@ -90,8 +90,8 @@ nameserver 114.114.114.114" >/run/systemd/resolve/stub-resolv.conf
 echo -e "nameserver 8.8.8.8
 nameserver 114.114.114.114" >/etc/resolv.conf
 echo -e "${GREEN}尝试禁用无用检测${RES}"
-ln -s ~/SakiRC/sakirc.sh /usr/bin/sakirc 2>/dev/null
-chmod 777 /usr/bin/sakirc 2>/dev/null
+ln -s ~/Endm/endm.sh /usr/bin/endm 2>/dev/null
+chmod 777 /usr/bin/endm 2>/dev/null
 touch ~/.hushlogin
 
 whiptail_available=0
@@ -178,20 +178,6 @@ elif [ "$current_distro" != "archarm" ] && [ "$current_distro" != "archamd" ] &&
     echo -e "${ERROR} 无法检测系统发行版，跳过语言配置步骤${RES}"
     sleep 2
     clear
-fi
-
-if [ $whiptail_available -eq 1 ]; then
-    whiptail --title "安装SakiSP" --yesno "是否需要安装SakiSP？该工具可用于很大用途" 10 60
-    if [ $? -eq 0 ]; then
-        clear
-        echo -e "${INFO} 用户选择安装SakiSP，正在前台安装中...${RES}"
-        git clone https://gh.xmly.dev/https://github.com/YingLi606/SakiSP.git 2>/dev/null
-        sleep 2
-        echo -e "${SUSSEC} SakiSP已完成安装步骤，如需使用请输入bash ~/SakiSP/sakisp.sh，即将进入下一步...${RES}"
-        sleep 3
-    else
-        echo -e "${INFO} 用户选择无需安装SakiSP，该步骤跳过${RES}"
-    fi
 fi
 
 clear

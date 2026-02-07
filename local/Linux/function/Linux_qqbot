@@ -91,7 +91,7 @@ startNapCatQQ() {
             if [ "${QQbot}" = "" ]; then
                 read -e -p "请输入您的QQ号（建议用小号）：" QQbot
                 log "QQbot为空"
-                Modify_the_variable QQbot "${QQbot}" "${HOME}/SakiRC/config/config.sh"
+                Modify_the_variable QQbot "${QQbot}" "${HOME}/Endm/config/config.sh"
             fi
             case "${1}" in
             --Background | -B)
@@ -114,7 +114,7 @@ startNapCatQQ() {
             if [ "${QQbot}" = "" ]; then
                 read -e -p "请输入您的QQ号（建议用小号）：" QQbot
                 log "QQbot为空"
-                Modify_the_variable QQbot "${QQbot}" "${HOME}/SakiRC/config/config.sh"
+                Modify_the_variable QQbot "${QQbot}" "${HOME}/Endm/config/config.sh"
             fi
             case "${1}" in
             --Background | -B)

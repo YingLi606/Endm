@@ -11,7 +11,7 @@ WORRY="[${YELLOW}警告${RES}]:"
 SUSSEC="[${GREEN}成功${RES}]:"
 INFO="[${BLUE}信息${RES}]:"
 
-BASE_DIR="$HOME/.termux/SakiRC/MCserver"  
+BASE_DIR="$HOME/.termux/Endm/MCserver"  
 
 check_commands() {
     echo -e "${INFO} 正在检查必要命令....${RES}"

@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-uninstall_sakirc() {
+uninstall_endm() {
 RED="\033[31m"
 GREEN="\033[32m"
 YELLOW="\033[33m"
@@ -11,12 +11,12 @@ if ! command -v whiptail &> /dev/null; then
     pkg install whiptail -y &> /dev/null
 fi
 
-if whiptail --title "SakiRC 卸载（请确保已经删除完容器）" --yesno "是否确认卸载SakiRC？建议检查已安装的容器是否已清空，如果没有建议先返回手动操作，若无视该警告且继续操作出现任何问题，开发者不承担任何责任" 8 50; then
+if whiptail --title "Endm 卸载（请确保已经删除完容器）" --yesno "是否确认卸载Endm？建议检查已安装的容器是否已清空，如果没有建议先返回手动操作，若无视该警告且继续操作出现任何问题，开发者不承担任何责任" 8 50; then
     echo -e "\n${GREEN}[+] 开始执行卸载操作...${RESET}"
 
     PATH1="${HOME}/.termux/共享文件夹"
-    PATH2="${HOME}/.termux/SakiRC"
-    PATH3="${HOME}/SakiRC"
+    PATH2="${HOME}/.termux/Endm"
+    PATH3="${HOME}/Endm"
 
     if [ -e "$PATH1" ]; then
         echo -e "${YELLOW}[*] 检测到 $PATH1，正在删除...${RESET}"
@@ -42,7 +42,7 @@ if whiptail --title "SakiRC 卸载（请确保已经删除完容器）" --yesno 
         echo -e "${YELLOW}[*] 未检测到 $PATH3，跳过删除${RESET}"
     fi
 
-    echo -e "\n${GREEN}[√] 卸载操作全部完成！感谢你使用SakiRC！${RESET}"
+    echo -e "\n${GREEN}[√] 卸载操作全部完成！感谢你使用Endm！${RESET}"
 else
     echo -e "\n${RED}[-] 用户取消卸载操作，程序即将退出...${RESET}"
     sleep 4

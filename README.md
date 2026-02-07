@@ -1,4 +1,4 @@
-# SakiRC
+# Endm
 新起点，再出发！
 
 一个用于管理软件安装、配置和系统优化的脚本工具，旨在简化Proot容器的日常操作。
@@ -9,7 +9,7 @@
 
 ## 介绍
 
-SakiRC 是一个基于 Shell 的系统管理工具，提供多种常用软件的安装、卸载、管理Proot容器以及垃圾清理等功能。适用于希望快速配置开发环境或优化系统的用户。
+Endm 是一个基于 Shell 的系统管理工具，提供多种常用软件的安装、卸载、管理Proot容器以及垃圾清理等功能。适用于希望快速配置开发环境或优化系统的用户。
 
 ## 软件架构
 
@@ -24,14 +24,14 @@ SakiRC 是一个基于 Shell 的系统管理工具，提供多种常用软件的
 1. 确保系统已安装 `git` 和 `whiptail`(请确保在termux里)。
 2. 下载脚本：
    ```bash
-   git clone https://github.com/YingLi606/SakiRC.git
+   git clone https://github.com/YingLi606/Endm.git
    ```
 
 ## 使用说明
 
 运行脚本：
 ```bash
-bash ~/SakiRC/sakirc.sh
+bash ~/Endm/endm.sh
 ```
 
 根据菜单选择所需功能（如安装软件）

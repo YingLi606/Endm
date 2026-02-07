@@ -34,7 +34,7 @@ Android_speed() {
         cleat
     fi
 
-    mkdir -p "${HOME}/SakiRC/download" 2>/dev/null
+    mkdir -p "${HOME}/Endm/download" 2>/dev/null
 
     for i in {20..1}; do
         echo -en "\033[1;33m📊 测速即将开始，预估消耗流量 50-200MB (剩余: ${i}s) [Y/n]: \033[0m"
@@ -74,7 +74,7 @@ Android_speed() {
 
     for name in "${!mirrors[@]}"; do
         timestamp=$(date +%s%3N)
-        tmp_file="${HOME}/SakiRC/download/ls-lR_${timestamp}.gz"
+        tmp_file="${HOME}/Endm/download/ls-lR_${timestamp}.gz"
 
         echo -e "\n\033[1;34m📡 正在检测镜像节点: \033[1;36m${name}\033[0m"
 
@@ -83,7 +83,7 @@ Android_speed() {
                --show-console-readout=true \
                --download-result=default \
                --timeout=20 \
-               -d "${HOME}/SakiRC/download" \
+               -d "${HOME}/Endm/download" \
                -o "ls-lR_${timestamp}.gz" \
                "${mirrors[$name]}"
 
@@ -99,7 +99,7 @@ Android_speed() {
         fi
     done
 
-    rm -rf "${HOME}/SakiRC/download"/* 2>/dev/null
+    rm -rf "${HOME}/Endm/download"/* 2>/dev/null
 
     echo -e "\n\033[1;34m════════════════════ 温馨提示 ════════════════\033[0m"
     echo -e "\033[1;36m💡 测速结果仅代表下载速度，不反映镜像同步频率\033[0m"

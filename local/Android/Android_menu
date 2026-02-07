@@ -1,12 +1,12 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# if source $HOME/SakiRC/local/Android/Android_function; then
+# if source $HOME/Endm/local/Android/Android_function; then
 # 	echo -e "${SUSSEC}加载安卓功能成功"
 # 	log "加载安卓功能成功"
 # else
 # 	echo -e "${WORRY}加载安卓功能失败"
 # 	log "加载安卓功能失败"
 # fi
-for script in $HOME/SakiRC/local/Android/function/* ; do
+for script in $HOME/Endm/local/Android/function/* ; do
 	source "$script" 
 	log "加载:$script"
 done
@@ -37,7 +37,7 @@ start)
 	;;
 *)
 	Android_menu=$(
-		whiptail --title "SakiRC V2.3.0" --menu "请选择功能" 15 60 8 \
+		whiptail --title "Endm V26.0.0" --menu "请选择功能" 15 60 8 \
 			"1" "🍀 管理proot容器" \
 			"2" "♻️ 垃圾清理" \
 			"3" "🐸 Android软件商店（Beta）" \
@@ -89,7 +89,7 @@ start)
 		;;	
 	4)
 		log "卸载脚本"
-		uninstall_sakirc
+		uninstall_endm
 		;;			
 	5)
 		log "网速测试"

@@ -1,4 +1,4 @@
-for script in $HOME/SakiRC/local/Linux/function/*; do
+for script in $HOME/Endm/local/Linux/function/*; do
 	source "$script"
 	log "加载:$script"
 done
@@ -39,17 +39,20 @@ startNapCatQQ | startnQQ)
 startNapCatQQB | startnQQB)
 	startNapCatQQ -B
 	;;
+EndmTool | endmtool)
+	EndmTool
+	;;		
 *)
 	if [ "${system_os_type}" = "" ]; then
 		echo -e "${INFO}完整linux环境或非本脚本安装的proot{RES}"
 	fi
-
 	Linux_menu=$(
-		whiptail --title "SakiRC V2.3.0" --menu "请选择功能" 15 60 4 \
+		whiptail --title "Endm V26.0.0" --menu "请选择功能" 15 60 4 \
 			"1" "💎 管理mc Server（旧）" \
 		    "2" "⭐️ MC服务器管理（新）" \
 			"3" "🤖 QQ机器人" \
 			"4" "🚀 网速测试" \
+			"5" "💼 Endm Tool" \
 			"0" "🌚 退出" \
 			"D" "⚠️ debuger" 3>&1 1>&2 2>&3
 	)
@@ -119,7 +122,6 @@ startNapCatQQB | startnQQB)
 			;;
 		esac
 		;;
-
 	2)
 		MCServernew_menu=$(
 			whiptail --title "即将切换" --menu "请确保已安装Java" 15 60 8 \
@@ -238,10 +240,42 @@ startNapCatQQB | startnQQB)
 			;;
 		esac
 		;;
+	5)
+		EndmTool_menu=$(
+			whiptail --title "即将切换" --menu "即将启动Endm工具" 15 60 8 \
+				"1" "下一步" \
+				"0" "退出" 3>&1 1>&2 2>&3
+		)
+		case $EndmTool_menu in
+		1)
+			log "下一步"
+			EndmToolagin_menu=$(
+				whiptail --title "再来一次" --menu "即将进入" 15 60 8 \
+					"1" "理解确认" \
+					"0" "退出" 3>&1 1>&2 2>&3
+			)
+			case $EndmToolagin_menu in
+			1)
+				log "理解确认"
+				echo -e "${INFO}正在尝试切换，请稍等"
+				sleep 3
+				clear
+				EndmTool
+				;;
+			*)
+				exit 1
+				;;
+			esac
+			;;
+		*)
+			echo -e "${RED}QUIT$RES"
+			exit 1
+			;;
+		esac
+		;;
 	D)
 		debuger
 		;;
 	esac
 	;;
 esac
-
