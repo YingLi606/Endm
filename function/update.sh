@@ -140,9 +140,7 @@ if [ "$(printf '%s\n' "$REMOTE_VERSION" "$LOCAL_VERSION" | sort -V | tail -n1)" 
 	log 5秒原地倒计时结束，脚本即将重启
 	exec ${HOME}/Endm/endm.sh
 else
-	echo -e "\n${GREEN}=========================================${RES}"
-	echo -e "${GREEN} 当前已是最新版本（$LOCAL_VERSION），无需更新！${RES}"
-	echo -e "${GREEN}=========================================${RES}"
+	echo -e "${GREEN}✅ 当前已是最新版本（$LOCAL_VERSION），无需更新！${RES}"
 	sleep 1
 	clear
 	log 已是最新版本
