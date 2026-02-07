@@ -4,9 +4,9 @@ open_debian_os_list() {
 	clear
 	echo -e "\n\e[90m📌 \e[1m【选择Debian系统版本】\e[0m"
 	sleep 0.1
-	echo -e "\e[92m1. 🟢 Trixie（Debian 13）\e[0m"
+	echo -e "\e[96m1. ⚪️ Forky（Debian 14）\e[0m"
 	sleep 0.1
-	echo -e "\e[96m4. ⚪️ Forky（Debian 14）\e[0m"	
+	echo -e "\e[92m2. 🟢 Trixie（Debian 13）\e[0m"
 	sleep 0.1
 	echo -e "\e[93m3. 🟡 Bookworm（Debian 12）\e[0m"
 	sleep 0.1
@@ -17,15 +17,15 @@ open_debian_os_list() {
 	read -p "请输入对应数字选择：" debian_os_list
 	case ${debian_os_list} in
     1)
+		os_name=Forky_Debian_14
+		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/debian/forky/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
+		Download_proot_url=${Proot_os_download_source}/debian/forky/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
+		;;
+    2)
 		os_name=Trixie_Debian_13
 		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/debian/trixie/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
 		Download_proot_url=${Proot_os_download_source}/debian/trixie/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
 		;;
-    2)
-		os_name=Forky_Debian_13
-		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/debian/forky/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
-		Download_proot_url=${Proot_os_download_source}/debian/forky/${archurl}/default/${Download_proot_NAME}/rootfs.tar.xz
-		;;		
 	3)
 		os_name=Bookworm_Debian_12
 		Download_proot_NAME=$(curl -s "${Proot_os_download_source}/debian/bookworm/${archurl}/default/" | grep -oP '<a href="[^"]*">\K[^<]*' | sed -n '2s|/$||p')
@@ -175,7 +175,7 @@ open_centos_os_list() {
 open_archlinux_os_list() {
 	clear
 	sleep 0.1
-	echo -e "\n\e[90m📌 \e[1m【选择Arch Linux系统版本，安装过程速度可能较慢，建议提前准备好魔法上网】\e[0m"
+	echo -e "\n\e[90m📌 \e[1m【选择Arch Linux系统版本，安装过程速度可能较慢，建议提前准备好魔法上网，同时暂不支持Linux功能】\e[0m"
 	sleep 0.1
 	echo -e "\e[95m1.🟣 Arch\e[0m"
 	sleep 0.1

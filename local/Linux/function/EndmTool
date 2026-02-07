@@ -1440,7 +1440,7 @@ EndmTool_menu() {
     while true; do
         choice=$(whiptail --clear \
             --backtitle "" \
-            --title "EndmTool V26.0.0" \
+            --title "EndmTool V26.0.5" \
             --menu "✨ 请选择类别： \n
 在这里,从这一刻开始！ \n
 🔧 提示：使用 ↓↑ 键导航，按 Enter 确认" \

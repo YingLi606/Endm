@@ -47,7 +47,7 @@ EndmTool | endmtool)
 		echo -e "${INFO}完整linux环境或非本脚本安装的proot{RES}"
 	fi
 	Linux_menu=$(
-		whiptail --title "Endm V26.0.2" --menu "请选择功能" 15 60 4 \
+		whiptail --title "Endm V26.0.5" --menu "请选择功能" 15 60 4 \
 			"1" "💎 管理mc Server（旧）" \
 		    "2" "⭐️ MC服务器管理（新）" \
 			"3" "🤖 QQ机器人" \
