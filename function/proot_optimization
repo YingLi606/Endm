@@ -84,11 +84,15 @@ echo "127.0.0.1 localhost" >/etc/hosts
 mkdir -p /run/systemd/resolve
 echo -e "${GREEN}正在修复DNS${RES}"
 
-echo -e "nameserver 8.8.8.8
-nameserver 114.114.114.114" >/run/systemd/resolve/stub-resolv.conf
+echo -e "nameserver 223.5.5.5
+nameserver 119.29.29.29
+nameserver 8.8.8.8
+nameserver 1.1.1.1" >/run/systemd/resolve/stub-resolv.conf
 
-echo -e "nameserver 8.8.8.8
-nameserver 114.114.114.114" >/etc/resolv.conf
+echo -e "nameserver 223.5.5.5
+nameserver 119.29.29.29
+nameserver 8.8.8.8
+nameserver 1.1.1.1" >/etc/resolv.conf
 echo -e "${GREEN}尝试禁用无用检测${RES}"
 ln -s ~/Endm/endm.sh /usr/bin/endm 2>/dev/null
 chmod 777 /usr/bin/endm 2>/dev/null
