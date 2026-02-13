@@ -128,6 +128,7 @@ startNapCatQQ() {
             esac
         else
             echo -e "${WORRY}系统版本不支持！仅支持Ubuntu 20及以上/Debian 10及以上/CentOS 9"
+            sleep 3
             log "系统版本不支持，仅支持Ubuntu 20+/Debian 10+/CentOS 9"
         fi
     fi
