@@ -85,11 +85,11 @@ echo "127.0.0.1 localhost" >/etc/hosts
 mkdir -p /run/systemd/resolve
 echo -e "${GREEN}尝试修复DNS${RES}"
 
-echo -e "nameserver 8.8.8.8
-nameserver 114.114.114.114" >/run/systemd/resolve/stub-resolv.conf
+echo -e "nameserver 1.1.1.1
+nameserver 1.0.0.1" >/run/systemd/resolve/stub-resolv.conf
 
-echo -e "nameserver 8.8.8.8
-nameserver 114.114.114.114" >/etc/resolv.conf
+echo -e "nameserver 1.1.1.1
+nameserver 1.0.0.1" >/etc/resolv.conf
 echo -e "${GREEN}尝试禁用无用检测${RES}"
 ln -s ~/Endm/endm.sh /usr/bin/endm 2>/dev/null
 chmod 777 /usr/bin/endm 2>/dev/null
@@ -183,10 +183,19 @@ fi
 
 clear
 echo -e "${INFO}现在，请选择你需要更换的国内软件源${RES}"
+fix_linkerconfig
 sleep 3
-sudo bash -c "bash <(curl -sSL https://linuxmirrors.cn/main.sh)" && echo -e "${GREEN}✅ 软件源切换执行完成，正在进入下一步...${RES}"
+bash <(curl -sSL https://linuxmirrors.cn/main.sh) && echo -e "${GREEN}✅ 软件源切换执行完成，正在进入下一步...${RES}"
 sleep 2
 clear
+
+fix_linkerconfig() {
+    mkdir -p /linkerconfig >/dev/null 2>&1
+    touch /linkerconfig/ld.config.txt >/dev/null 2>&1
+    chmod 755 /linkerconfig >/dev/null 2>&1
+    chmod 644 /linkerconfig/ld.config.txt >/dev/null 2>&1
+}
+
 sleep 0.1
 echo -e "─────────────────────────────────────────"
 echo -e "  📦  TMOE TOOL 安装向导  📦              "
@@ -201,7 +210,7 @@ if [[ "$user_choice" =~ ^[Yy]$ ]]; then
     clear
     echo -e "\n${INFO}🚀 用户选择安装，正在准备启动安装程序...${RES}"
     sleep 2
-    sudo bash -c "$(curl -L https://gitee.com/mo2/linux/raw/2/2)"
+    bash -c "$(curl -L https://gitee.com/mo2/linux/raw/2/2)"
     sleep 2
     clear
     echo -e "─────────────────────────────────────────"
