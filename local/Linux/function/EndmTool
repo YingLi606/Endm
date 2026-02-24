@@ -113,7 +113,7 @@ show_endmtool_art() {
      sleep 1
 
      echo -e "${CYAN}■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■${RESET}"
-     echo -e "${RED}▶${YELLOW}▶${GREEN}▶${CYAN}      EndmTool V26.1.0      ${GREEN}◀${YELLOW}◀${RED}◀${RESET}"
+     echo -e "${RED}▶${YELLOW}▶${GREEN}▶${CYAN}      EndmTool V26.2.5      ${GREEN}◀${YELLOW}◀${RED}◀${RESET}"
      echo -e "${CYAN}■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■${RESET}\n"
 }
 
@@ -1438,7 +1438,7 @@ EndmTool_menu() {
     while true; do
         choice=$(whiptail --clear \
             --backtitle "" \
-            --title "EndmTool V26.1.5" \
+            --title "EndmTool V26.2.5" \
             --menu "✨ 请选择类别： \n
 在这里,从这一刻开始！ \n
 🔧 提示：使用 ↓↑ 键导航，按 Enter 确认" \
@@ -2626,11 +2626,12 @@ nasyt_start() {
     pretty_print "NASYT" "⌛️ 正在检测中...."
     echo -e "${YELLOW}温馨提示:检测完成后将自动安装或启动工具，请您放心${RESET}"
 
-    if ! command -v nasyt &> /dev/null; then
+    if [ ! -f "$HOME/usr/bin/nasyt" ]; then
         echo -e "${YELLOW}未检测到 nasyt，开始自动安装...${RESET}"
+        sleep 2
         bash -c "$(curl -L https://raw.gitcode.com/nasyt/nasyt-linux-tool/raw/master/nasyt_install.sh)"
         echo -e "${GREEN}✅ 安装完成，准备启动 nasyt${RESET}"
-        sleep 1
+        sleep 2
         clear
         nasyt
     else

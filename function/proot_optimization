@@ -81,6 +81,7 @@ hcjx() {
 }
 
 echo -e "${INFO}正在优化系统，请勿退出！${RES}"
+fix_linkerconfig
 echo "127.0.0.1 localhost" >/etc/hosts
 mkdir -p /run/systemd/resolve
 echo -e "${GREEN}尝试修复DNS${RES}"
@@ -183,17 +184,18 @@ fi
 
 clear
 echo -e "${INFO}现在，请选择你需要更换的国内软件源${RES}"
-fix_linkerconfig
 sleep 3
 bash <(curl -sSL https://linuxmirrors.cn/main.sh) && echo -e "${GREEN}✅ 软件源切换执行完成，正在进入下一步...${RES}"
 sleep 2
 clear
 
 fix_linkerconfig() {
-    mkdir -p /linkerconfig >/dev/null 2>&1
-    touch /linkerconfig/ld.config.txt >/dev/null 2>&1
-    chmod 755 /linkerconfig >/dev/null 2>&1
-    chmod 644 /linkerconfig/ld.config.txt >/dev/null 2>&1
+     echo -e "${YELLOW}🔧 正在修复 linkerconfig 缺失问题...${RES}"
+     mkdir -p /linkerconfig >/dev/null 2>&1
+     touch /linkerconfig/ld.config.txt >/dev/null 2>&1
+     chmod 755 /linkerconfig >/dev/null 2>&1
+     chmod 644 /linkerconfig/ld.config.txt >/dev/null 2>&1
+     echo -e "${GREEN}✅ linkerconfig 修复完成${RES}"
 }
 
 sleep 0.1
