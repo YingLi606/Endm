@@ -8,7 +8,7 @@ if (whiptail --title "切换至TMOE" --yesno "由于Moe作者已停止维护，�
     echo -e "\033[1;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
     sleep 5
     if ping -c 3 www.bing.com > /dev/null 2>&1; then
-        bash -c "$(curl -L l.tmoe.me)"
+        bash -c "$(curl -L gitee.com/mo2/linux/raw/2/2)"
     else
         clear
         echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"

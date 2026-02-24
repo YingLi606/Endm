@@ -1,5 +1,3 @@
-#!/bin/bash
-
 if [ -L "$0" ]; then
     # 处理符号链接
     LOCAL_SCRIPT_PATH=$(readlink "$0")
@@ -1440,7 +1438,7 @@ EndmTool_menu() {
     while true; do
         choice=$(whiptail --clear \
             --backtitle "" \
-            --title "EndmTool V26.1.0" \
+            --title "EndmTool V26.1.5" \
             --menu "✨ 请选择类别： \n
 在这里,从这一刻开始！ \n
 🔧 提示：使用 ↓↑ 键导航，按 Enter 确认" \
@@ -1962,6 +1960,7 @@ switch_manage() {
         "1" "🍭 切换至TMOE Linux" \
         "2" "🐱 切换至云崽（仅支持Ubuntu 22.04）" \
         "3" "🐰 切换至APT软件源管理" \
+        "4" "💎 切换至Nasyt" \
         "0" "🌚 返回" \
         3>&1 1>&2 2>&3)
 
@@ -1969,6 +1968,7 @@ switch_manage() {
             "1") tmoe_switch ;;
             "2") yunzai_switch ;;
             "3") apt_switch ;;
+            "4") nasyt_switch ;;            
             "0") break ;;
         esac
     done
@@ -2491,6 +2491,21 @@ apt_switch() {
     esac
 }
 
+# 切换至Nasyt
+nasyt_switch() {
+    choice=$(whiptail --clear --backtitle "即将切换至Nasyt" \
+    --title " 📦 操作选择（谨慎选择） " \
+    --menu "切换之后将无法回退这个脚本哦：" 12 40 2 \
+    "1" "🔁 切换" \
+    "0" "🔙 返回" \
+    3>&1 1>&2 2>&3)
+
+    case $choice in
+        "1") nasyt_start ;;
+        "0") ;;
+    esac
+}
+
 # 系统版本检测函数
 check_system() {
     pretty_print "YUNZAI" "🔍 正在检测系统版本..."
@@ -2605,6 +2620,27 @@ apt_start(){
     ping -c3 www.baidu.com &>/dev/null || { echo -e "${RED}❌ 网络不通${RESET}"; exit 1; };
     sudo bash -c "bash <(curl -sSL https://linuxmirrors.cn/main.sh)" && echo -e "${GREEN}✅ 执行完成${RESET}" || echo -e "${RED}❌ 执行失败${RESET}";
     sleep 3; clear;
+}
+
+nasyt_start() {
+    pretty_print "NASYT" "⌛️ 正在检测中...."
+    echo -e "${YELLOW}温馨提示:检测完成后将自动安装或启动工具，请您放心${RESET}"
+
+    if ! command -v nasyt &> /dev/null; then
+        echo -e "${YELLOW}未检测到 nasyt，开始自动安装...${RESET}"
+        bash -c "$(curl -L https://raw.gitcode.com/nasyt/nasyt-linux-tool/raw/master/nasyt_install.sh)"
+        echo -e "${GREEN}✅ 安装完成，准备启动 nasyt${RESET}"
+        sleep 1
+        clear
+        nasyt
+    else
+        echo -e "${GREEN}✅ nasyt 已存在，直接启动${RESET}"
+        sleep 1
+        clear
+        nasyt
+    fi
+
+    clear
 }
 
 # QQ ARM64安装

@@ -1,0 +1,49 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+check_and_run_nasyt(){
+clear
+echo -e "\033[1;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "\033[1;36m 🔍 检查 Nasyt 命令是否存在 \033[0m"
+echo -e "\033[1;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+sleep 1
+
+if ! command -v nasyt &> /dev/null; then
+clear
+echo -e "\033[1;33m⚠️  未检测到 Nasyt，开始自动安装 \033[0m"
+sleep 1
+
+if ping -c 3 www.bing.com > /dev/null 2>&1; then
+bash -c "$(curl -L https://raw.gitcode.com/nasyt/nasyt-linux-tool/raw/master/nasyt_install.sh)"
+echo -e "\033[1;32m✅ Nasyt 安装完成，准备启动 \033[0m"
+sleep 1
+else
+clear
+echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "\033[1;31m ❌ 网络连接失败，请检查网络环境 \033[0m"
+echo -e "\033[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+exit 1
+fi
+else
+clear
+echo -e "\033[1;32m✅ Nasyt 已存在，直接启动 \033[0m"
+sleep 1
+fi
+
+clear
+echo -e "\033[1;36m🚀 启动 Nasyt 工具箱... \033[0m"
+sleep 1
+nasyt
+}
+
+Android_nasyt(){
+clear
+if (whiptail --title "切换至Nasyt" --yesno "你确定要切换Nasyt工具箱吗？" 12 60); then
+check_and_run_nasyt
+else
+clear
+echo -e "\033[1;33m已取消切换至Nasyt \033[0m"
+sleep 2
+clear
+exit 0
+fi
+}
