@@ -79,9 +79,18 @@ hcjx() {
     echo -e "${GREEN}按回车键继续...${RES}"
     read -r
 }
+fixit() {
+     echo -e "${YELLOW}🔧 正在修复 linkerconfig 缺失问题...${RES}"
+     sleep 1
+     mkdir -p /linkerconfig >/dev/null 2>&1
+     touch /linkerconfig/ld.config.txt >/dev/null 2>&1
+     chmod 755 /linkerconfig >/dev/null 2>&1
+     chmod 644 /linkerconfig/ld.config.txt >/dev/null 2>&1
+     echo -e "${GREEN}✅ linkerconfig 修复完成${RES}"
+}
 
 echo -e "${INFO}正在优化系统，请勿退出！${RES}"
-fix_linkerconfig
+fixit
 echo "127.0.0.1 localhost" >/etc/hosts
 mkdir -p /run/systemd/resolve
 echo -e "${GREEN}尝试修复DNS${RES}"
@@ -133,10 +142,10 @@ EOF
     if command -v whiptail >/dev/null 2>&1; then
         whiptail_available=1
     else
-        echo -e "${WORRY}whiptail 安装失败，将跳过SakiSP安装询问${RES}"
+        echo -e "${WORRY}whiptail 安装失败${RES}"
     fi
 else
-    echo -e "${WORRY}当前系统（$current_distro）不支持 whiptail，将跳过 SakiSP 安装步骤${RES}"
+    echo -e "${WORRY}当前系统（$current_distro）不支持 whiptail ${RES}"
     whiptail_available=0
 fi
 
@@ -195,15 +204,6 @@ sleep 3
 bash <(curl -sSL https://linuxmirrors.cn/main.sh) && echo -e "${GREEN}✅ 软件源切换执行完成，正在进入下一步...${RES}"
 sleep 2
 clear
-
-fix_linkerconfig() {
-     echo -e "${YELLOW}🔧 正在修复 linkerconfig 缺失问题...${RES}"
-     mkdir -p /linkerconfig >/dev/null 2>&1
-     touch /linkerconfig/ld.config.txt >/dev/null 2>&1
-     chmod 755 /linkerconfig >/dev/null 2>&1
-     chmod 644 /linkerconfig/ld.config.txt >/dev/null 2>&1
-     echo -e "${GREEN}✅ linkerconfig 修复完成${RES}"
-}
 
 sleep 0.1
 echo -e "─────────────────────────────────────────"
