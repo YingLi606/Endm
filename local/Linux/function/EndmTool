@@ -113,7 +113,7 @@ show_endmtool_art() {
      sleep 1
 
      echo -e "${CYAN}■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■${RESET}"
-     echo -e "${RED}▶${YELLOW}▶${GREEN}▶${CYAN}      EndmTool V26.3.5      ${GREEN}◀${YELLOW}◀${RED}◀${RESET}"
+     echo -e "${RED}▶${YELLOW}▶${GREEN}▶${CYAN}      EndmTool V26.3.7      ${GREEN}◀${YELLOW}◀${RED}◀${RESET}"
      echo -e "${CYAN}■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■${RESET}\n"
 }
 
@@ -1438,7 +1438,7 @@ EndmTool_menu() {
     while true; do
         choice=$(whiptail --clear \
             --backtitle "" \
-            --title "EndmTool V26.3.5" \
+            --title "EndmTool V26.3.7" \
             --menu "✨ 请选择类别： \n
 在这里,从这一刻开始！ \n
 🔧 提示：使用 ↓↑ 键导航，按 Enter 确认" \
@@ -2494,7 +2494,7 @@ apt_switch() {
 # 切换至Nasyt
 nasyt_switch() {
     choice=$(whiptail --clear --backtitle "即将切换至Nasyt" \
-    --title " 📦 操作选择（谨慎选择） " \
+    --title " 📦 操作选择（Proot可能不稳定） " \
     --menu "切换之后将无法回退这个脚本哦：" 12 40 2 \
     "1" "🔁 切换" \
     "0" "🔙 返回" \
