@@ -85,17 +85,17 @@ validity_git() {
 		case ${wheregit} in
 		1)
 			Modify_the_variable git "https:\/\/github.com\/" ${HOME}/Endm/config/config.sh
-			Modify_the_variable rawgit "https:\/\/raw.githubusercontent.com\/YingLi606\/Endm\/refs\/heads\/main\/" ${HOME}/Endm/config/config.sh
+			Modify_the_variable rawgit "https:\/\/raw.githubusercontent.com\/EterUltimate\/Endm\/refs\/heads\/main\/" ${HOME}/Endm/config/config.sh
 			return 0
 			;;
 		2)
 			Modify_the_variable git "https:\/\/gh.xmly.dev\/https:\/\/github.com\/" ${HOME}/Endm/config/config.sh
-			Modify_the_variable rawgit "https:\/\/gh.xmly.dev\/https:\/\/raw.githubusercontent.com\/YingLi606\/Endm\/refs\/heads\/main\/" ${HOME}/Endm/config/config.sh
+			Modify_the_variable rawgit "https:\/\/gh.xmly.dev\/https:\/\/raw.githubusercontent.com\/EterUltimate\/Endm\/refs\/heads\/main\/" ${HOME}/Endm/config/config.sh
 			return 0
 			;;
 		*)
 			echo -e " 未选择默认修改为 ${YELLOW}Github${RES} "
-			Modify_the_variable rawgit "https:\/\/raw.githubusercontent.com\/YingLi606\/Endm\/refs\/heads\/main\/" ${HOME}/Endm/config/config.sh
+			Modify_the_variable rawgit "https:\/\/raw.githubusercontent.com\/EterUltimate\/Endm\/refs\/heads\/main\/" ${HOME}/Endm/config/config.sh
 			return 0
 			;;
 		esac
@@ -106,7 +106,7 @@ validity_auto_upgrade() {
 	source ${HOME}/Endm/config/config.sh
 	if [ "${auto_upgrade}" = "" ]; then
 		wheregit=$(
-			whiptail --title "选择默认安装源" --menu "是否自动更新软件包(默认关闭,但建议开启)" 15 60 4 \
+			whiptail --title "自动更新" --menu "是否自动更新软件包(建议开启，以便获取到新版本)" 15 60 4 \
 				"1" "开启" \
 				"2" "关闭" \
 				"0" "退出" 3>&1 1>&2 2>&3
