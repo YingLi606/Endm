@@ -113,7 +113,7 @@ show_endmtool_art() {
      sleep 1
 
      echo -e "${CYAN}■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■${RESET}"
-     echo -e "${RED}▶${YELLOW}▶${GREEN}▶${CYAN}      EndmTool V26.4.0      ${GREEN}◀${YELLOW}◀${RED}◀${RESET}"
+     echo -e "${RED}▶${YELLOW}▶${GREEN}▶${CYAN}      EndmTool V27.0.0      ${GREEN}◀${YELLOW}◀${RED}◀${RESET}"
      echo -e "${CYAN}■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■${RESET}\n"
 }
 
@@ -1438,9 +1438,9 @@ EndmTool_menu() {
     while true; do
         choice=$(whiptail --clear \
             --backtitle "" \
-            --title "EndmTool V26.4.0" \
+            --title "EndmTool V27.0.0" \
             --menu "✨ 请选择类别： \n
-更好用！为你带来更多不可能！ \n
+27了，到达终点站了，江湖再见....\n
 🔧 提示：使用 ↓↑ 键导航，按 Enter 确认" \
             0 60 0 \
             "1" "💼 软件中心 —— 应用宝库" \
