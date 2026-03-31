@@ -123,7 +123,7 @@ if [ "$(printf '%s\n' "$REMOTE_VERSION" "$LOCAL_VERSION" | sort -V | tail -n1)" 
 	if [ "${qqBot}" != "" ]; then
 		Modify_the_variable qqBot ${qqBot} ${HOME}/EterUl/config/config.sh
 	fi
-	chmod 777 ${HOME}/EterUl/eterui.sh
+	chmod 777 ${HOME}/EterUl/eter.sh
 	
 	clear
 	echo -e "${GREEN}=========================================${RES}"
@@ -139,7 +139,7 @@ if [ "$(printf '%s\n' "$REMOTE_VERSION" "$LOCAL_VERSION" | sort -V | tail -n1)" 
 	clear
 	log 5秒原地倒计时结束，脚本即将重启
 	exit
-	exec ${HOME}/EterUl/eterui.sh
+	exec ${HOME}/EterUl/eter.sh
 else
 	echo -e "${GREEN}✅ 当前已是最新版本（$LOCAL_VERSION），无需更新！${RES}"
 	sleep 1

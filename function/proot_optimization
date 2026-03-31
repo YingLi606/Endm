@@ -101,8 +101,8 @@ nameserver 1.0.0.1" >/run/systemd/resolve/stub-resolv.conf
 echo -e "nameserver 1.1.1.1
 nameserver 1.0.0.1" >/etc/resolv.conf
 echo -e "${GREEN}尝试禁用无用检测${RES}"
-ln -s ~/EterUl/eterui.sh /usr/bin/eterui 2>/dev/null
-chmod 777 /usr/bin/eterui 2>/dev/null
+ln -s ~/EterUl/eter.sh /usr/bin/eter 2>/dev/null
+chmod 777 /usr/bin/eter 2>/dev/null
 touch ~/.hushlogin
 
 whiptail_available=0

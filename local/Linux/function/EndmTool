@@ -113,7 +113,7 @@ show_eteruitool_art() {
      sleep 1
 
      echo -e "${CYAN}■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■${RESET}"
-     echo -e "${RED}▶${YELLOW}▶${GREEN}▶${CYAN}      EterUlTool V28.0.0      ${GREEN}◀${YELLOW}◀${RED}◀${RESET}"
+     echo -e "${RED}▶${YELLOW}▶${GREEN}▶${CYAN}      EterUlTool V28.0.1      ${GREEN}◀${YELLOW}◀${RED}◀${RESET}"
      echo -e "${CYAN}■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■${RESET}\n"
 }
 
@@ -1438,7 +1438,7 @@ EterUlTool_menu() {
     while true; do
         choice=$(whiptail --clear \
             --backtitle "" \
-            --title "EterUlTool V28.0.0" \
+            --title "EterUlTool V28.0.1" \
             --menu "✨ 请选择类别： \n
 EterUI 28，新的起点！\n
 🔧 提示：使用 ↓↑ 键导航，按 Enter 确认" \

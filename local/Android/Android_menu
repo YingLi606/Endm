@@ -37,7 +37,7 @@ start)
 	;;
 *)
 	Android_menu=$(
-		whiptail --title "EterUl For Termux V28.0.0" --menu "新的起点，请选择功能" 15 60 8 \
+		whiptail --title "EterUl For Termux V28.0.1" --menu "新的起点，请选择功能" 15 60 8 \
 			"1" "🍀 管理proot容器" \
 			"2" "♻️ 垃圾清理" \
 			"3" "🐸 Android软件商店（Beta）" \
