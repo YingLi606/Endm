@@ -2,6 +2,9 @@
 
 [English](README_en.md) | 中文
 
+已停止维护，后续将是新的一代....
+（Bug严重多，对不起，放弃了）
+
 一个为 Android Termux 用户设计的 proot 管理工具，也可用于 Linux 服务器。
 
 ## 功能特性
